@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)https://www.astralweb.com.tw/jmeter-website-stress-testing-tutorial/ -->
+<html lang="en-US" prefix="og: http://ogp.me/ns#" style="" class=" js no-touch csstransforms csstransforms3d csstransitions boxsizing"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!--[if ie]><meta content='IE=edge' http-equiv='X-UA-Compatible'/><![endif]-->
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="HandheldFriendly" content="true">
+<meta name="revisit-after" content="7 DAYS">
+<meta name="robots" content="All">
+<meta name="cf-2fa-verify" content="b5e68934b41a94f">
+
+<link rel="shortcut icon" href="https://www.astralweb.com.tw/wp-content/uploads/2017/09/astral-icon.png">
+
+<title>JMeter-網頁壓力測試教學 - Astral Web 歐斯瑞有限公司</title>
+
+<meta name="description" content="上次我們說到JMeter的安裝，這次來說說網頁壓力測試。一起來看看吧！ JMeter壓力測試 主要是指定頁面裡在時間內有多少人進入頁面。 我們先用以下二種做測試： 1. 一秒內10個人進入Google首頁 2. 一秒內10個人進入Google網頁，三分鐘後自動停止">
+<link rel="canonical" href="https://www.astralweb.com.tw/jmeter-website-stress-testing-tutorial/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JMeter-網頁壓力測試教學 - Astral Web 歐斯瑞有限公司">
+<meta property="og:description" content="上次我們說到JMeter的安裝，這次來說說網頁壓力測試。一起來看看吧！ JMeter壓力測試 主要是指定頁面裡在時間內有多少人進入頁面。 我們先用以下二種做測試： 1. 一秒內10個人進入Google首頁 2. 一秒內10個人進入Google網頁，三分鐘後自動停止">
+<meta property="og:url" content="https://www.astralweb.com.tw/jmeter-website-stress-testing-tutorial/">
+<meta property="og:site_name" content="Astral Web 歐斯瑞有限公司">
+<meta property="article:author" content="https://www.facebook.com/astralweb.com.tw">
+<meta property="article:tag" content="網站測試">
+<meta property="article:tag" content="網站技術與設計">
+<meta property="article:section" content="技術應用">
+<meta property="article:published_time" content="2021-05-18T15:17:34+08:00">
+<meta property="article:modified_time" content="2021-11-30T16:05:01+08:00">
+<meta property="og:updated_time" content="2021-11-30T16:05:01+08:00">
+<meta property="og:image" content="https://www.astralweb.com.tw/wp-content/uploads/2021/05/JMeter網頁壓力測試教學.jpg">
+<meta property="og:image:secure_url" content="https://www.astralweb.com.tw/wp-content/uploads/2021/05/JMeter網頁壓力測試教學.jpg">
+<meta property="og:image:width" content="1500">
+<meta property="og:image:height" content="788">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="上次我們說到JMeter的安裝，這次來說說網頁壓力測試。一起來看看吧！ JMeter壓力測試 主要是指定頁面裡在時間內有多少人進入頁面。 我們先用以下二種做測試： 1. 一秒內10個人進入Google首頁 2. 一秒內10個人進入Google網頁，三分鐘後自動停止">
+<meta name="twitter:title" content="JMeter-網頁壓力測試教學 - Astral Web 歐斯瑞有限公司">
+<meta name="twitter:image" content="https://www.astralweb.com.tw/wp-content/uploads/2021/05/JMeter網頁壓力測試教學.jpg">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Astral Web 歐斯瑞有限公司 » Feed" href="https://www.astralweb.com.tw/feed/">
+<link rel="alternate" type="application/rss+xml" title="Astral Web 歐斯瑞有限公司 » Comments Feed" href="https://www.astralweb.com.tw/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Astral Web 歐斯瑞有限公司 » JMeter-網頁壓力測試教學 Comments Feed" href="https://www.astralweb.com.tw/jmeter-website-stress-testing-tutorial/feed/">
+<script async="" charset="utf-8" src="./01_files/saved_resource" type="text/javascript"></script><script type="text/javascript" async="" src="./01_files/js"></script><script type="text/javascript" async="" src="./01_files/analytics.js.下載"></script><script type="text/javascript" async="" src="./01_files/insight.min.js.下載"></script><script async="" src="./01_files/gtm.js.下載"></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.astralweb.com.tw\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.5"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56692,8205,9792,65039],[55357,56692,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./01_files/wp-emoji-release.min.js.下載" type="text/javascript" defer=""></script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="preload" as="style" id="themeone-shortcodes" href="./01_files/shortcodes.css" type="text/css" media="all"><link rel="stylesheet" id="themeone-shortcodes-css" href="./01_files/shortcodes.css" type="text/css" media="all">
+<link rel="preload" as="style" id="font-awesome" href="./01_files/font-awesome.min.css" type="text/css" media="all"><link rel="stylesheet" id="font-awesome-css" href="./01_files/font-awesome.min.css" type="text/css" media="all">
+<!--[if lte IE 7]>
+<link rel='preload' as='style' id='font-awesome-ie7' href='https://www.astralweb.com.tw/wp-content/plugins/themeone-shortcodes/shortcodes/css/font-awesome-ie7.min.css?ver=4.9.5' type='text/css' media='all' /><link rel='stylesheet' id='font-awesome-ie7-css'  href='https://www.astralweb.com.tw/wp-content/plugins/themeone-shortcodes/shortcodes/css/font-awesome-ie7.min.css?ver=4.9.5' type='text/css' media='all' />
+<![endif]-->
+<link rel="preload" as="style" id="steadysets" href="./01_files/steadysets.css" type="text/css" media="all"><link rel="stylesheet" id="steadysets-css" href="./01_files/steadysets.css" type="text/css" media="all">
+<link rel="preload" as="style" id="pixelicons" href="./01_files/pixelicons.css" type="text/css" media="all"><link rel="stylesheet" id="pixelicons-css" href="./01_files/pixelicons.css" type="text/css" media="all">
+<link rel="preload" as="style" id="ccchildpagescss" href="./01_files/styles.css" type="text/css" media="all"><link rel="stylesheet" id="ccchildpagescss-css" href="./01_files/styles.css" type="text/css" media="all">
+<link rel="preload" as="style" id="ccchildpagesskincss" href="./01_files/skins.css" type="text/css" media="all"><link rel="stylesheet" id="ccchildpagesskincss-css" href="./01_files/skins.css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='preload' as='style' id='ccchildpagesiecss' href='https://www.astralweb.com.tw/wp-content/plugins/cc-child-pages/includes/css/styles.ie.css?ver=1.36' type='text/css' media='all' /><link rel='stylesheet' id='ccchildpagesiecss-css'  href='https://www.astralweb.com.tw/wp-content/plugins/cc-child-pages/includes/css/styles.ie.css?ver=1.36' type='text/css' media='all' />
+<![endif]-->
+<link rel="preload" as="style" id="contact-form-7" href="./01_files/styles(1).css" type="text/css" media="all"><link rel="stylesheet" id="contact-form-7-css" href="./01_files/styles(1).css" type="text/css" media="all">
+<link rel="preload" as="style" id="page-list-style" href="./01_files/page-list.css" type="text/css" media="all"><link rel="stylesheet" id="page-list-style-css" href="./01_files/page-list.css" type="text/css" media="all">
+<link rel="preload" as="style" id="estilo" href="./01_files/estilo.css" type="text/css" media="all"><link rel="stylesheet" id="estilo-css" href="./01_files/estilo.css" type="text/css" media="all">
+<link rel="preload" as="style" id="tpg_get_posts_css" href="./01_files/tpg-get-posts-style.css" type="text/css" media="all"><link rel="stylesheet" id="tpg_get_posts_css-css" href="./01_files/tpg-get-posts-style.css" type="text/css" media="all">
+<link rel="preload" as="style" id="wpsimpleanchorslinks_styles" href="./01_files/styles(2).css" type="text/css" media="all"><link rel="stylesheet" id="wpsimpleanchorslinks_styles-css" href="./01_files/styles(2).css" type="text/css" media="screen">
+<link rel="preload" as="style" id="theme-name-parent-style" href="./01_files/style.css" type="text/css" media="all"><link rel="stylesheet" id="theme-name-parent-style-css" href="./01_files/style.css" type="text/css" media="all">
+<link rel="preload" as="style" id="theme-style" href="./01_files/theme.css" type="text/css" media="all"><link rel="stylesheet" id="theme-style-css" href="./01_files/theme.css" type="text/css" media="all">
+<link rel="preload" as="style" id="theme-display-utilities" href="./01_files/bootstrap-utilities.min.css" type="text/css" media="all"><link rel="stylesheet" id="theme-display-utilities-css" href="./01_files/bootstrap-utilities.min.css" type="text/css" media="all">
+<link rel="preload" as="style" id="main-styles" href="./01_files/style(1).css" type="text/css" media="all"><link rel="stylesheet" id="main-styles-css" href="./01_files/style(1).css" type="text/css" media="all">
+<link rel="preload" as="style" id="icomoon" href="./01_files/icomoon.css" type="text/css" media="all"><link rel="stylesheet" id="icomoon-css" href="./01_files/icomoon.css" type="text/css" media="all">
+<!--[if lte IE 8]>
+<link rel='preload' as='style' id='ie7-support' href='https://www.astralweb.com.tw/wp-content/themes/mobius/css/ie7support.css?ver=4.9.5' type='text/css' media='all' /><link rel='stylesheet' id='ie7-support-css'  href='https://www.astralweb.com.tw/wp-content/themes/mobius/css/ie7support.css?ver=4.9.5' type='text/css' media='all' />
+<![endif]-->
+<link rel="preload" as="style" id="mobius-grid-css" href="./01_files/mobius-grid.css" type="text/css" media="all"><link rel="stylesheet" id="mobius-grid-css-css" href="./01_files/mobius-grid.css" type="text/css" media="all">
+<link rel="preload" as="style" id="tablepress-default" href="./01_files/tablepress-combined.min.css" type="text/css" media="all"><link rel="stylesheet" id="tablepress-default-css" href="./01_files/tablepress-combined.min.css" type="text/css" media="all">
+<link rel="preload" as="style" id="gca-column-styles" href="./01_files/gca-column-styles.css" type="text/css" media="all"><link rel="stylesheet" id="gca-column-styles-css" href="./01_files/gca-column-styles.css" type="text/css" media="all">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin=""><link ref="preload" as="style" href="https://fonts.googleapis.com/css?family=Open+Sans%3A400%2C700%2C600%7CSource+Sans+Pro%3A400%2C700%7CRaleway%3A500%2C700%2C600&amp;subset=latin&amp;ver=1654587717&amp;dispaly=swap"><link rel="stylesheet" href="./01_files/css" media="all" onload="this.media=&#39;all&#39;"><link rel="preload" as="style" id="custom_menu_style" href="./01_files/style(2).css" type="text/css" media="all"><link rel="stylesheet" id="custom_menu_style-css" href="./01_files/style(2).css" type="text/css" media="all">
+<link rel="preload" as="style" id="like-styles" href="./01_files/post-like.css" type="text/css" media="all"><link rel="stylesheet" id="like-styles-css" href="./01_files/post-like.css" type="text/css" media="all">
+<script type="text/javascript" src="./01_files/modernizr.js.下載"></script>
+<script type="text/javascript" src="./01_files/jquery.js.下載"></script>
+<script type="text/javascript" src="./01_files/jquery-migrate.min.js.下載"></script>
+<script type="text/javascript">
+var mejsL10n = {"language":"en","strings":{"mejs.install-flash":"You are using a browser that does not have Flash player enabled or installed. Please turn on your Flash player plugin or download the latest version from https:\/\/get.adobe.com\/flashplayer\/","mejs.fullscreen-off":"Turn off Fullscreen","mejs.fullscreen-on":"Go Fullscreen","mejs.download-video":"Download Video","mejs.fullscreen":"Fullscreen","mejs.time-jump-forward":["Jump forward 1 second","Jump forward %1 seconds"],"mejs.loop":"Toggle Loop","mejs.play":"Play","mejs.pause":"Pause","mejs.close":"Close","mejs.time-slider":"Time Slider","mejs.time-help-text":"Use Left\/Right Arrow keys to advance one second, Up\/Down arrows to advance ten seconds.","mejs.time-skip-back":["Skip back 1 second","Skip back %1 seconds"],"mejs.captions-subtitles":"Captions\/Subtitles","mejs.captions-chapters":"Chapters","mejs.none":"None","mejs.mute-toggle":"Mute Toggle","mejs.volume-help-text":"Use Up\/Down Arrow keys to increase or decrease volume.","mejs.unmute":"Unmute","mejs.mute":"Mute","mejs.volume-slider":"Volume Slider","mejs.video-player":"Video Player","mejs.audio-player":"Audio Player","mejs.ad-skip":"Skip ad","mejs.ad-skip-info":["Skip in 1 second","Skip in %1 seconds"],"mejs.source-chooser":"Source Chooser","mejs.stop":"Stop","mejs.speed-rate":"Speed Rate","mejs.live-broadcast":"Live Broadcast","mejs.afrikaans":"Afrikaans","mejs.albanian":"Albanian","mejs.arabic":"Arabic","mejs.belarusian":"Belarusian","mejs.bulgarian":"Bulgarian","mejs.catalan":"Catalan","mejs.chinese":"Chinese","mejs.chinese-simplified":"Chinese (Simplified)","mejs.chinese-traditional":"Chinese (Traditional)","mejs.croatian":"Croatian","mejs.czech":"Czech","mejs.danish":"Danish","mejs.dutch":"Dutch","mejs.english":"English","mejs.estonian":"Estonian","mejs.filipino":"Filipino","mejs.finnish":"Finnish","mejs.french":"French","mejs.galician":"Galician","mejs.german":"German","mejs.greek":"Greek","mejs.haitian-creole":"Haitian Creole","mejs.hebrew":"Hebrew","mejs.hindi":"Hindi","mejs.hungarian":"Hungarian","mejs.icelandic":"Icelandic","mejs.indonesian":"Indonesian","mejs.irish":"Irish","mejs.italian":"Italian","mejs.japanese":"Japanese","mejs.korean":"Korean","mejs.latvian":"Latvian","mejs.lithuanian":"Lithuanian","mejs.macedonian":"Macedonian","mejs.malay":"Malay","mejs.maltese":"Maltese","mejs.norwegian":"Norwegian","mejs.persian":"Persian","mejs.polish":"Polish","mejs.portuguese":"Portuguese","mejs.romanian":"Romanian","mejs.russian":"Russian","mejs.serbian":"Serbian","mejs.slovak":"Slovak","mejs.slovenian":"Slovenian","mejs.spanish":"Spanish","mejs.swahili":"Swahili","mejs.swedish":"Swedish","mejs.tagalog":"Tagalog","mejs.thai":"Thai","mejs.turkish":"Turkish","mejs.ukrainian":"Ukrainian","mejs.vietnamese":"Vietnamese","mejs.welsh":"Welsh","mejs.yiddish":"Yiddish"}};
+</script>
+<script type="text/javascript" src="./01_files/mediaelement-and-player.min.js.下載"></script>
+<script type="text/javascript" src="./01_files/mediaelement-migrate.min.js.下載"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var _wpmejsSettings = {"pluginPath":"\/wp-includes\/js\/mediaelement\/","classPrefix":"mejs-","stretching":"responsive"};
+/* ]]> */
+</script>
+<link rel="https://api.w.org/" href="https://www.astralweb.com.tw/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.astralweb.com.tw/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.astralweb.com.tw/wp-includes/wlwmanifest.xml">
+<meta name="generator" content="WordPress 4.9.5">
+<link rel="shortlink" href="https://www.astralweb.com.tw/?p=26902">
+<link rel="alternate" type="application/json+oembed" href="https://www.astralweb.com.tw/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.astralweb.com.tw%2Fjmeter-website-stress-testing-tutorial%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://www.astralweb.com.tw/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.astralweb.com.tw%2Fjmeter-website-stress-testing-tutorial%2F&amp;format=xml">
+
+
+<style type="text/css">                    #popmake-16910 .pum-content {display: flex; flex-flow: row nowrap;}
+#popmake-16910 .pum-content .right {flex: 1 1 30%; padding: 60px 10px; text-align: center;}
+#popmake-16910 .pum-content .right .to-button {margin: 0;}
+#popmake-16910 .pum-content .left {flex: 1 1 70%; padding: 0 25px 25px 25px;}
+#popmake-16910 .pum-content .left h1,
+#popmake-16910 .pum-content .left h2,
+#popmake-16910 .pum-content .left p {color: white;}
+#popmake-20021.pum-container.pum-responsive {background-color: transparent!important; width: auto; left: 50%; transform: translateX(-50%)}
+#popmake-20021.pum-container.pum-responsive .aligncenter {margin: 0;}
+#popmake-20021.pum-container.pum-responsive p {padding: 0;}
+@media only screen and (max-width: 767px) {
+  #popmake-16910 .pum-content {display: block;}
+  .pum-theme-16904 .pum-content + .pum-close, .pum-theme-default-theme .pum-content + .pum-close .pum-content + .pum-close, .pum-theme-default-theme .pum-content + .pum-close {color: #fff; top: 0; right: 0;}
+  #popmake-16910 .pum-content .right {padding:20px 0;}
+  .wp-image-16913.aligncenter {margin: 0 auto;}
+  #popmake-16910 .pum-content .left h1 {font-size: 20px !important;}
+  #popmake-16910 .pum-content .left h2 {font-size: 16px;}
+  #popmake-16910 .pum-content .left p {font-size: 12px;}
+}
+
+@media only screen and (max-width: 359px) {.mobile-hidden{display: none;}}
+
+#single-post-section {
+	padding: 0 0 40px 0!important;
+}
+#to-crumbs {
+	margin-bottom: 20px!important;
+}
+.to-page-heading {
+    padding: 70px 0 20px;
+}
+#btn-jobs {
+    display: block!important;
+}                </style> <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="wp-custom-css">
+			#sliding-menu-logo img {
+	max-width: 100% !important;
+}
+.to-loader-logo {
+	max-width: 100% !important;
+}		</style>
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link rel="preload" as="style" href="./01_files/css(1)">
+<link rel="stylesheet" href="./01_files/css(1)" media="all" onload="this.media=&#39;all&#39;">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poller+One&display=swap" />
+</noscript>
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PR7CQ6P');</script>
+
+<script type="text/javascript" src="./01_files/w"></script><style media="print" class="jx_ui_StyleSheet" __jx__id="___$_2" type="text/css">.zopim { display: none !important }</style></head>
+<body class="post-template-default single single-post postid-26902 single-format-standard dark desktop" data-top-bar="on" style="padding-top: 60px;"><div class="zopim" __jx__id="___$_73 ___$_73" data-test-id="ChatWidgetButton" style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; padding: 0px; border: 0px; background: transparent; overflow: hidden; position: fixed; z-index: 16000002; width: 188px; height: 30px; right: 10px; bottom: 0px;"><iframe frameborder="0" style="background-color: transparent; vertical-align: text-bottom; position: relative; width: 100%; height: 100%; min-width: 100%; min-height: 100%; max-width: 100%; max-height: 100%; margin: 0px; overflow: hidden; display: block;" src="./01_files/saved_resource.html" data-test-id="ChatWidgetButton-iframe" title="Zendesk Chat widget button"></iframe></div><div class="zopim" __jx__id="___$_4 ___$_4" data-test-id="ChatWidgetWindow" style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; padding: 0px; border: 0px; background: transparent; overflow: hidden; position: fixed; z-index: 16000001; right: 10px; bottom: 0px; border-top-left-radius: 5px; border-top-right-radius: 5px; display: none; width: 290px; height: 400px; box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 3px 2px;"><iframe frameborder="0" style="background-color: transparent; vertical-align: text-bottom; position: relative; width: 100%; height: 100%; min-width: 100%; min-height: 100%; max-width: 100%; max-height: 100%; margin: 0px; overflow: hidden; display: block;" src="./01_files/saved_resource(1).html" data-test-id="ChatWidgetWindow-iframe" title="Zendesk Chat widget window"></iframe></div>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PR7CQ6P"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+<div id="sliding-sidebar" class="sidebarColor dark" style="overflow: hidden;">
+<div id="sliding-sidebar-inner" style="transform: translateZ(0px);">
+<div id="search-3" class="widget widget_search">
+<form action="https://www.astralweb.com.tw/" method="GET" id="searchform" class="search">
+<input type="text" class="field search " name="s" autocomplete="off" maxlength="100" placeholder="請輸入關鍵字">
+<i class="fa fa-times accentColorHover"></i>
+
+<button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+</form></div> <div id="recent-posts-3" class="widget widget_recent_entries"> <h4>Recent Posts</h4> <ul>
+<li>
+<a href="https://www.astralweb.com.tw/2023-tappay-service/">金流串接推薦！2023 TapPay 最新服務</a>
+</li>
+<li>
+<a href="https://www.astralweb.com.tw/photoshop-object-selection/">Photoshop【超簡單系列】物件選取工具</a>
+</li>
+<li>
+<a href="https://www.astralweb.com.tw/photoshop-neural-filters-color-harmonization/">Photoshop【超簡單系列】協調</a>
+</li>
+<li>
+<a href="https://www.astralweb.com.tw/top-10-google-analytics-4-configuration-mistakes/">前10大GA4錯誤設定</a>
+</li>
+<li>
+<a href="https://www.astralweb.com.tw/photoshop-neural-filters-color-transfer/">Photoshop【超簡單系列】顏色轉移</a>
+</li>
+</ul>
+</div><div id="categories-3" class="widget widget_categories"><h4>文章分類</h4> <ul>
+<li class="cat-item cat-item-1412"><a href="https://www.astralweb.com.tw/category/ecommerce-for-beginner/">電商新手包</a>
+<ul class="children">
+<li class="cat-item cat-item-1413"><a href="https://www.astralweb.com.tw/category/ecommerce-for-beginner/how-to-choose-ecommerce-platform/">選擇銷售平台</a>
+</li>
+<li class="cat-item cat-item-1414"><a href="https://www.astralweb.com.tw/category/ecommerce-for-beginner/magento-for-beginner/">Magento入門</a>
+</li>
+</ul>
+</li>
+<li class="cat-item cat-item-1409"><a href="https://www.astralweb.com.tw/category/ecommerce-news/">電商快訊</a>
+<ul class="children">
+<li class="cat-item cat-item-978"><a href="https://www.astralweb.com.tw/category/ecommerce-news/astralweb-news/">歐斯瑞新訊</a>
+</li>
+<li class="cat-item cat-item-1411"><a href="https://www.astralweb.com.tw/category/ecommerce-news/industry-news/">產業新知</a>
+</li>
+</ul>
+</li>
+<li class="cat-item cat-item-44"><a href="https://www.astralweb.com.tw/category/magento/">Magento</a>
+<ul class="children">
+<li class="cat-item cat-item-1335"><a href="https://www.astralweb.com.tw/category/magento/magento-open-source/">Open Source</a>
+</li>
+<li class="cat-item cat-item-1252"><a href="https://www.astralweb.com.tw/category/magento/adobe-commerce/">Adobe Commerce</a>
+</li>
+</ul>
+</li>
+<li class="cat-item cat-item-1245"><a href="https://www.astralweb.com.tw/category/shopify/">Shopify</a>
+</li>
+<li class="cat-item cat-item-54"><a href="https://www.astralweb.com.tw/category/development/">技術應用</a>
+<ul class="children">
+<li class="cat-item cat-item-1408"><a href="https://www.astralweb.com.tw/category/development/software-pm-note/">軟體PM小記</a>
+</li>
+<li class="cat-item cat-item-1265"><a href="https://www.astralweb.com.tw/category/development/%e5%89%8d%e7%ab%af%e9%96%8b%e7%99%bc/">前端開發</a>
+</li>
+<li class="cat-item cat-item-1271"><a href="https://www.astralweb.com.tw/category/development/%e5%be%8c%e7%ab%af%e9%96%8b%e7%99%bc/">後端開發</a>
+</li>
+<li class="cat-item cat-item-910"><a href="https://www.astralweb.com.tw/category/development/website-qa-testing/">網站測試</a>
+</li>
+</ul>
+</li>
+<li class="cat-item cat-item-1218"><a href="https://www.astralweb.com.tw/category/design/">設計分享</a>
+</li>
+<li class="cat-item cat-item-976"><a href="https://www.astralweb.com.tw/category/digital-marketing/">行銷與社群</a>
+</li>
+<li class="cat-item cat-item-918"><a href="https://www.astralweb.com.tw/category/ecommerce-service/">電商串接</a>
+<ul class="children">
+<li class="cat-item cat-item-1410"><a href="https://www.astralweb.com.tw/category/ecommerce-service/payment/">金流</a>
+</li>
+<li class="cat-item cat-item-1112"><a href="https://www.astralweb.com.tw/category/ecommerce-service/logistic/">物流</a>
+</li>
+<li class="cat-item cat-item-1274"><a href="https://www.astralweb.com.tw/category/ecommerce-service/customer-service/">客服</a>
+</li>
+<li class="cat-item cat-item-944"><a href="https://www.astralweb.com.tw/category/ecommerce-service/marketing/">行銷</a>
+</li>
+<li class="cat-item cat-item-1268"><a href="https://www.astralweb.com.tw/category/ecommerce-service/internal-managemet/">內部管理</a>
+</li>
+</ul>
+</li>
+</ul>
+</div><div id="archives-4" class="widget widget_archive"><h4>文章彙整</h4> <label class="screen-reader-text" for="archives-dropdown-4">文章彙整</label>
+<select id="archives-dropdown-4" name="archive-dropdown" onchange="document.location.href=this.options[this.selectedIndex].value;">
+<option value="">Select Month</option>
+<option value="https://www.astralweb.com.tw/2022/12/"> December 2022 &nbsp;(1)</option>
+<option value="https://www.astralweb.com.tw/2022/11/"> November 2022 &nbsp;(11)</option>
+<option value="https://www.astralweb.com.tw/2022/10/"> October 2022 &nbsp;(16)</option>
+<option value="https://www.astralweb.com.tw/2022/09/"> September 2022 &nbsp;(5)</option>
+<option value="https://www.astralweb.com.tw/2022/08/"> August 2022 &nbsp;(9)</option>
+<option value="https://www.astralweb.com.tw/2022/07/"> July 2022 &nbsp;(3)</option>
+<option value="https://www.astralweb.com.tw/2022/06/"> June 2022 &nbsp;(2)</option>
+<option value="https://www.astralweb.com.tw/2022/05/"> May 2022 &nbsp;(7)</option>
+<option value="https://www.astralweb.com.tw/2022/04/"> April 2022 &nbsp;(5)</option>
+<option value="https://www.astralweb.com.tw/2022/03/"> March 2022 &nbsp;(12)</option>
+<option value="https://www.astralweb.com.tw/2022/02/"> February 2022 &nbsp;(4)</option>
+<option value="https://www.astralweb.com.tw/2022/01/"> January 2022 &nbsp;(1)</option>
+<option value="https://www.astralweb.com.tw/2021/12/"> December 2021 &nbsp;(6)</option>
+<option value="https://www.astralweb.com.tw/2021/11/"> November 2021 &nbsp;(1)</option>
+<option value="https://www.astralweb.com.tw/2021/10/"> October 2021 &nbsp;(7)</option>
+<option value="https://www.astralweb.com.tw/2021/09/"> September 2021 &nbsp;(7)</option>
+<option value="https://www.astralweb.com.tw/2021/08/"> August 2021 &nbsp;(11)</option>
+<option value="https://www.astralweb.com.tw/2021/07/"> July 2021 &nbsp;(7)</option>
+<option value="https://www.astralweb.com.tw/2021/06/"> June 2021 &nbsp;(14)</option>
+<option value="https://www.astralweb.com.tw/2021/05/"> May 2021 &nbsp;(11)</option>
+<option value="https://www.astralweb.com.tw/2021/04/"> April 2021 &nbsp;(6)</option>
+<option value="https://www.astralweb.com.tw/2021/03/"> March 2021 &nbsp;(6)</option>
+<option value="https://www.astralweb.com.tw/2021/02/"> February 2021 &nbsp;(12)</option>
+<option value="https://www.astralweb.com.tw/2021/01/"> January 2021 &nbsp;(8)</option>
+<option value="https://www.astralweb.com.tw/2020/12/"> December 2020 &nbsp;(13)</option>
+<option value="https://www.astralweb.com.tw/2020/11/"> November 2020 &nbsp;(7)</option>
+<option value="https://www.astralweb.com.tw/2020/10/"> October 2020 &nbsp;(15)</option>
+<option value="https://www.astralweb.com.tw/2020/09/"> September 2020 &nbsp;(7)</option>
+<option value="https://www.astralweb.com.tw/2020/08/"> August 2020 &nbsp;(14)</option>
+<option value="https://www.astralweb.com.tw/2020/07/"> July 2020 &nbsp;(2)</option>
+<option value="https://www.astralweb.com.tw/2020/06/"> June 2020 &nbsp;(17)</option>
+<option value="https://www.astralweb.com.tw/2020/05/"> May 2020 &nbsp;(14)</option>
+<option value="https://www.astralweb.com.tw/2020/04/"> April 2020 &nbsp;(17)</option>
+<option value="https://www.astralweb.com.tw/2020/03/"> March 2020 &nbsp;(21)</option>
+<option value="https://www.astralweb.com.tw/2020/02/"> February 2020 &nbsp;(4)</option>
+<option value="https://www.astralweb.com.tw/2020/01/"> January 2020 &nbsp;(2)</option>
+<option value="https://www.astralweb.com.tw/2019/12/"> December 2019 &nbsp;(4)</option>
+<option value="https://www.astralweb.com.tw/2019/11/"> November 2019 &nbsp;(3)</option>
+<option value="https://www.astralweb.com.tw/2019/10/"> October 2019 &nbsp;(7)</option>
+<option value="https://www.astralweb.com.tw/2019/09/"> September 2019 &nbsp;(11)</option>
+<option value="https://www.astralweb.com.tw/2019/08/"> August 2019 &nbsp;(13)</option>
+<option value="https://www.astralweb.com.tw/2019/07/"> July 2019 &nbsp;(2)</option>
+<option value="https://www.astralweb.com.tw/2019/06/"> June 2019 &nbsp;(10)</option>
+<option value="https://www.astralweb.com.tw/2019/05/"> May 2019 &nbsp;(14)</option>
+<option value="https://www.astralweb.com.tw/2019/04/"> April 2019 &nbsp;(11)</option>
+<option value="https://www.astralweb.com.tw/2019/03/"> March 2019 &nbsp;(8)</option>
+<option value="https://www.astralweb.com.tw/2019/02/"> February 2019 &nbsp;(9)</option>
+<option value="https://www.astralweb.com.tw/2019/01/"> January 2019 &nbsp;(14)</option>
+<option value="https://www.astralweb.com.tw/2018/12/"> December 2018 &nbsp;(16)</option>
+<option value="https://www.astralweb.com.tw/2018/11/"> November 2018 &nbsp;(20)</option>
+<option value="https://www.astralweb.com.tw/2018/10/"> October 2018 &nbsp;(22)</option>
+<option value="https://www.astralweb.com.tw/2018/09/"> September 2018 &nbsp;(30)</option>
+<option value="https://www.astralweb.com.tw/2018/08/"> August 2018 &nbsp;(22)</option>
+<option value="https://www.astralweb.com.tw/2018/07/"> July 2018 &nbsp;(36)</option>
+<option value="https://www.astralweb.com.tw/2018/06/"> June 2018 &nbsp;(24)</option>
+<option value="https://www.astralweb.com.tw/2018/05/"> May 2018 &nbsp;(21)</option>
+<option value="https://www.astralweb.com.tw/2018/04/"> April 2018 &nbsp;(12)</option>
+<option value="https://www.astralweb.com.tw/2018/03/"> March 2018 &nbsp;(32)</option>
+<option value="https://www.astralweb.com.tw/2018/02/"> February 2018 &nbsp;(15)</option>
+<option value="https://www.astralweb.com.tw/2018/01/"> January 2018 &nbsp;(15)</option>
+<option value="https://www.astralweb.com.tw/2017/12/"> December 2017 &nbsp;(39)</option>
+<option value="https://www.astralweb.com.tw/2017/11/"> November 2017 &nbsp;(15)</option>
+<option value="https://www.astralweb.com.tw/2017/10/"> October 2017 &nbsp;(13)</option>
+<option value="https://www.astralweb.com.tw/2017/09/"> September 2017 &nbsp;(13)</option>
+<option value="https://www.astralweb.com.tw/2017/08/"> August 2017 &nbsp;(14)</option>
+<option value="https://www.astralweb.com.tw/2017/07/"> July 2017 &nbsp;(4)</option>
+<option value="https://www.astralweb.com.tw/2017/06/"> June 2017 &nbsp;(16)</option>
+<option value="https://www.astralweb.com.tw/2017/05/"> May 2017 &nbsp;(15)</option>
+<option value="https://www.astralweb.com.tw/2017/04/"> April 2017 &nbsp;(9)</option>
+<option value="https://www.astralweb.com.tw/2017/03/"> March 2017 &nbsp;(7)</option>
+<option value="https://www.astralweb.com.tw/2017/02/"> February 2017 &nbsp;(6)</option>
+<option value="https://www.astralweb.com.tw/2017/01/"> January 2017 &nbsp;(12)</option>
+<option value="https://www.astralweb.com.tw/2016/12/"> December 2016 &nbsp;(14)</option>
+<option value="https://www.astralweb.com.tw/2016/11/"> November 2016 &nbsp;(6)</option>
+<option value="https://www.astralweb.com.tw/2016/10/"> October 2016 &nbsp;(12)</option>
+<option value="https://www.astralweb.com.tw/2016/09/"> September 2016 &nbsp;(11)</option>
+<option value="https://www.astralweb.com.tw/2016/08/"> August 2016 &nbsp;(18)</option>
+<option value="https://www.astralweb.com.tw/2016/07/"> July 2016 &nbsp;(12)</option>
+<option value="https://www.astralweb.com.tw/2016/06/"> June 2016 &nbsp;(16)</option>
+<option value="https://www.astralweb.com.tw/2016/05/"> May 2016 &nbsp;(9)</option>
+<option value="https://www.astralweb.com.tw/2016/04/"> April 2016 &nbsp;(10)</option>
+<option value="https://www.astralweb.com.tw/2016/03/"> March 2016 &nbsp;(15)</option>
+<option value="https://www.astralweb.com.tw/2016/02/"> February 2016 &nbsp;(14)</option>
+<option value="https://www.astralweb.com.tw/2016/01/"> January 2016 &nbsp;(18)</option>
+<option value="https://www.astralweb.com.tw/2015/12/"> December 2015 &nbsp;(21)</option>
+<option value="https://www.astralweb.com.tw/2015/11/"> November 2015 &nbsp;(32)</option>
+<option value="https://www.astralweb.com.tw/2015/10/"> October 2015 &nbsp;(24)</option>
+<option value="https://www.astralweb.com.tw/2015/09/"> September 2015 &nbsp;(28)</option>
+<option value="https://www.astralweb.com.tw/2015/08/"> August 2015 &nbsp;(25)</option>
+<option value="https://www.astralweb.com.tw/2015/07/"> July 2015 &nbsp;(26)</option>
+<option value="https://www.astralweb.com.tw/2015/06/"> June 2015 &nbsp;(23)</option>
+<option value="https://www.astralweb.com.tw/2015/05/"> May 2015 &nbsp;(15)</option>
+<option value="https://www.astralweb.com.tw/2015/04/"> April 2015 &nbsp;(18)</option>
+<option value="https://www.astralweb.com.tw/2015/03/"> March 2015 &nbsp;(16)</option>
+<option value="https://www.astralweb.com.tw/2015/02/"> February 2015 &nbsp;(21)</option>
+<option value="https://www.astralweb.com.tw/2015/01/"> January 2015 &nbsp;(17)</option>
+<option value="https://www.astralweb.com.tw/2014/12/"> December 2014 &nbsp;(22)</option>
+<option value="https://www.astralweb.com.tw/2014/11/"> November 2014 &nbsp;(20)</option>
+<option value="https://www.astralweb.com.tw/2014/10/"> October 2014 &nbsp;(15)</option>
+<option value="https://www.astralweb.com.tw/2014/09/"> September 2014 &nbsp;(13)</option>
+<option value="https://www.astralweb.com.tw/2014/08/"> August 2014 &nbsp;(11)</option>
+<option value="https://www.astralweb.com.tw/2014/07/"> July 2014 &nbsp;(12)</option>
+<option value="https://www.astralweb.com.tw/2014/06/"> June 2014 &nbsp;(9)</option>
+<option value="https://www.astralweb.com.tw/2014/05/"> May 2014 &nbsp;(10)</option>
+<option value="https://www.astralweb.com.tw/2014/04/"> April 2014 &nbsp;(11)</option>
+<option value="https://www.astralweb.com.tw/2014/03/"> March 2014 &nbsp;(6)</option>
+<option value="https://www.astralweb.com.tw/2014/01/"> January 2014 &nbsp;(1)</option>
+<option value="https://www.astralweb.com.tw/2013/11/"> November 2013 &nbsp;(5)</option>
+<option value="https://www.astralweb.com.tw/2013/10/"> October 2013 &nbsp;(2)</option>
+</select>
+</div>
+</div>
+</div>
+<div id="sliding-menu" class="dark">
+<div id="sliding-menu-overlay"></div>
+<div id="sliding-menu-inner" style="width: 292px;">
+<div id="sliding-menu-logo"><a href="https://www.astralweb.com.tw/"><img class="to-loader-logo" src="./01_files/astral.webp" alt="" width="246" height="60"></a></div>
+<nav id="left-nav" style="height: 280px; min-height: 280px;">
+<ul class="left-menu">
+<li id="menu-item-27560" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-27560"><a class="menu-link-parent" data-depth="1">關於歐斯瑞<span class="arrow-indicator"><i class="fa icon-to-right-arrow-thin"></i></span></a>
+<ul class="sub-menu" style="top:0px !important">
+<li class="back-sub-menu" data-depth="0"><i class="fa icon-to-left-arrow-thin"></i><span>Back</span></li>
+<li id="menu-item-28594" class="mobile menu-item menu-item-type-post_type menu-item-object-page menu-item-28594"><a href="https://www.astralweb.com.tw/about/" class="menu-link-noparent"><i class="icon-menu fa mobile"></i>專業認證</a></li>
+<li id="menu-item-27562" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27562"><a href="https://www.astralweb.com.tw/about/jobs/" class="menu-link-noparent">工作機會</a></li>
+</ul>
+</li>
+<li id="menu-item-27566" class="megamenu columns-3 menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-27566"><a class="menu-link-parent" data-depth="1">Magento<span class="arrow-indicator"><i class="fa icon-to-right-arrow-thin"></i></span></a>
+<ul class="sub-menu" style="top:-40px !important">
+<li class="back-sub-menu" data-depth="0"><i class="fa icon-to-left-arrow-thin"></i><span>Back</span></li>
+<li id="menu-item-27575" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-27575"><a class="menu-link-parent" data-depth="2">Magento解決方案<span class="arrow-indicator"><i class="fa icon-to-right-arrow-thin"></i></span></a>
+<ul class="sub-menu" style="top:-52px !important">
+<li class="back-sub-menu" data-depth="1"><i class="fa icon-to-left-arrow-thin"></i><span>Back</span></li>
+<li id="menu-item-27567" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27567"><a href="https://www.astralweb.com.tw/services/magento/" class="menu-link-noparent">Magento服務</a></li>
+<li id="menu-item-27570" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27570"><a href="https://www.astralweb.com.tw/services/magento/magento-open-source/" class="menu-link-noparent">Magento Open Source</a></li>
+<li id="menu-item-27568" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27568"><a href="https://www.astralweb.com.tw/services/magento/magento-commerce/" class="menu-link-noparent">Magento Commerce</a></li>
+<li id="menu-item-27569" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27569"><a href="https://www.astralweb.com.tw/services/magento/magento-commerce-cloud/" class="menu-link-noparent">Magento Commerce Cloud</a></li>
+<li id="menu-item-27624" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27624"><a href="https://www.astralweb.com.tw/services/magento/order-management-system/" class="menu-link-noparent">Magento OMS</a></li>
+<li id="menu-item-27572" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27572"><a href="https://www.astralweb.com.tw/services/magento/mirakl-marketplace-development/" class="menu-link-noparent">Magento X Mirakl B2B2C商城</a></li>
+<li id="menu-item-27571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27571"><a href="https://www.astralweb.com.tw/services/magento/adobe-magento-commerce-b2b/" class="menu-link-noparent">Magento B2B</a></li>
+<li id="menu-item-28314" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-28314"><a href="https://www.astralweb.com.tw/b2e-sales-the-new-ecommerce-trend/" class="menu-link-noparent">Magento B2E</a></li>
+</ul>
+</li>
+<li id="menu-item-27576" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-27576"><a class="menu-link-parent" data-depth="2">Magento內部系統串接<span class="arrow-indicator"><i class="fa icon-to-right-arrow-thin"></i></span></a>
+<ul class="sub-menu" style="top:-92px !important">
+<li class="back-sub-menu" data-depth="1"><i class="fa icon-to-left-arrow-thin"></i><span>Back</span></li>
+<li id="menu-item-27578" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27578"><a href="https://www.astralweb.com.tw/services/magento/magento-erp/" class="menu-link-noparent">ERP管理系統整合 &nbsp;</a></li>
+<li id="menu-item-27580" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27580"><a href="https://www.astralweb.com.tw/services/pim/" class="menu-link-noparent">PIM 商品管理系統整合</a></li>
+<li id="menu-item-27579" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27579"><a href="https://www.astralweb.com.tw/services/magento/magento-pos-system/" class="menu-link-noparent">POS系統整合</a></li>
+<li id="menu-item-27577" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27577"><a href="https://www.astralweb.com.tw/services/magento/magento-crm/" class="menu-link-noparent">CRM客戶管理系統整合</a></li>
+</ul>
+</li>
+<li id="menu-item-27581" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-27581"><a class="menu-link-parent" data-depth="2">Magento外部系統串接<span class="arrow-indicator"><i class="fa icon-to-right-arrow-thin"></i></span></a>
+<ul class="sub-menu" style="top:-132px !important">
+<li class="back-sub-menu" data-depth="1"><i class="fa icon-to-left-arrow-thin"></i><span>Back</span></li>
+<li id="menu-item-27582" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27582"><a href="https://www.astralweb.com.tw/services/magento/magento-payment/" class="menu-link-noparent">各國金流系統</a></li>
+<li id="menu-item-27583" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27583"><a href="https://www.astralweb.com.tw/services/zendesk/" class="menu-link-noparent">第三方客服系統</a></li>
+</ul>
+</li>
+<li id="menu-item-27584" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-27584"><a class="menu-link-parent" data-depth="2">Magento健檢中心<span class="arrow-indicator"><i class="fa icon-to-right-arrow-thin"></i></span></a>
+<ul class="sub-menu" style="top:-172px !important">
+<li class="back-sub-menu" data-depth="1"><i class="fa icon-to-left-arrow-thin"></i><span>Back</span></li>
+<li id="menu-item-27585" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27585"><a href="https://www.astralweb.com.tw/services/magento/magento1-upgrade-to-magento2/" class="menu-link-noparent">Magento1 升級 Magento2</a></li>
+<li id="menu-item-27586" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27586"><a href="https://www.astralweb.com.tw/maintenance/magento/" class="menu-link-noparent">Magento 維運服務</a></li>
+</ul>
+</li>
+<li id="menu-item-27587" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-27587"><a class="menu-link-parent" data-depth="2">Magento for Headless &amp; PWA<span class="arrow-indicator"><i class="fa icon-to-right-arrow-thin"></i></span></a>
+<ul class="sub-menu" style="top:-212px !important">
+<li class="back-sub-menu" data-depth="1"><i class="fa icon-to-left-arrow-thin"></i><span>Back</span></li>
+<li id="menu-item-27588" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27588"><a href="https://www.astralweb.com.tw/services/magento/magento-headless-solutions-for-commerce-and-open-source-versions/" class="menu-link-noparent">Magento for Headless &amp; PWA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-28592" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-28592"><a class="menu-link-parent" data-depth="1">Shopify<span class="arrow-indicator"><i class="fa icon-to-right-arrow-thin"></i></span></a>
+<ul class="sub-menu" style="top:-80px !important">
+<li class="back-sub-menu" data-depth="0"><i class="fa icon-to-left-arrow-thin"></i><span>Back</span></li>
+<li id="menu-item-28595" class="mobile menu-item menu-item-type-post_type menu-item-object-page menu-item-28595"><a href="https://www.astralweb.com.tw/services/shopify/" class="menu-link-noparent"><i class="icon-menu fa mobile"></i>關於 Shopify</a></li>
+<li id="menu-item-28333" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-28333"><a href="https://www.astralweb.com.tw/shopify-plus-introduction/" class="menu-link-noparent">Shopify Plus</a></li>
+</ul>
+</li>
+<li id="menu-item-27590" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-27590"><a class="menu-link-parent" data-depth="1">企業電商顧問<span class="arrow-indicator"><i class="fa icon-to-right-arrow-thin"></i></span></a>
+<ul class="sub-menu" style="top:-120px !important">
+<li class="back-sub-menu" data-depth="0"><i class="fa icon-to-left-arrow-thin"></i><span>Back</span></li>
+<li id="menu-item-27591" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27591"><a href="https://www.astralweb.com.tw/services/digital-marketing/cro/" class="menu-link-noparent">電商轉換率分析CRO</a></li>
+<li id="menu-item-27592" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27592"><a href="https://www.astralweb.com.tw/services/digital-marketing/webpage-speed-optimization/" class="menu-link-noparent">網站速度優化</a></li>
+<li id="menu-item-27593" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27593"><a href="https://www.astralweb.com.tw/maintenance/server/" class="menu-link-noparent">AWS主機伺服器建置維運服務</a></li>
+</ul>
+</li>
+<li id="menu-item-27594" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-27594"><a class="menu-link-parent" data-depth="1">成功經驗<span class="arrow-indicator"><i class="fa icon-to-right-arrow-thin"></i></span></a>
+<ul class="sub-menu" style="top:-160px !important">
+<li class="back-sub-menu" data-depth="0"><i class="fa icon-to-left-arrow-thin"></i><span>Back</span></li>
+<li id="menu-item-27595" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-27595"><a href="https://www.astralweb.com.tw/portfolio/" class="menu-link-noparent">客戶成功案例</a></li>
+<li id="menu-item-27596" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27596"><a href="https://www.astralweb.com.tw/about/testimonials-and-reviews/" class="menu-link-noparent">客戶回饋</a></li>
+</ul>
+</li>
+<li id="menu-item-27597" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-has-children menu-item-27597"><a class="menu-link-parent" data-depth="1">新知分享<span class="arrow-indicator"><i class="fa icon-to-right-arrow-thin"></i></span></a>
+<ul class="sub-menu" style="top:-200px !important">
+<li class="back-sub-menu" data-depth="0"><i class="fa icon-to-left-arrow-thin"></i><span>Back</span></li>
+<li id="menu-item-28596" class="mobile menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-28596"><a href="https://www.astralweb.com.tw/resource/" class="menu-link-noparent"><i class="icon-menu fa mobile"></i>所有新知</a></li>
+<li id="menu-item-27599" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-27599"><a href="https://www.astralweb.com.tw/category/magento/" class="menu-link-noparent">Magento</a></li>
+<li id="menu-item-27598" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-27598"><a href="https://www.astralweb.com.tw/category/shopify/" class="menu-link-noparent">Shopify</a></li>
+</ul>
+</li>
+<li id="menu-item-27600" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27600"><a href="https://www.astralweb.com.tw/contact/" class="menu-link-noparent">聯絡我們</a></li>
+</ul>
+</nav>
+<div id="menu-widget">
+<div id="nav_menu-4" class="widget widget_nav_menu"><div class="menu-social-menu-container"><ul id="menu-social-menu-1" class="menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11070"><a target="_blank" href="https://twitter.com/Astralwebtaiwan"><i class="fa fa-twitter"></i></a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11071"><a target="_blank" href="https://www.linkedin.com/company/astral-web-taiwan"><i class="fa fa-linkedin"></i></a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11072"><a target="_blank" href="https://www.youtube.com/c/astralwebtw"><i class="fa fa-youtube"></i></a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11073"><a target="_blank" href="https://plus.google.com/u/0/102781611738605819784"><i class="fa fa-google-plus"></i></a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11074"><a target="_blank" href="https://www.facebook.com/astralweb.com.tw"><i class="fa fa-facebook"></i></a></li>
+</ul></div></div> </div>
+
+
+</div>
+</div>
+<div id="body-overlay"></div>
+<header id="header" class="header-menu fixed clearfix" data-header-type="header-menu" data-header-rezise="true" data-header-height="70" data-header-max-height="100" data-menu-link="1">
+<div id="header-overlay-slider" style="opacity:0.10;"></div>
+<div id="header-overlay" class="headerColor" style="opacity:0.90;"></div>
+<div id="top-banner"><p>三個月即上線！歐斯瑞銷售網站速成方案將由專人為您評估</p><a class="to-button tiny standard full-rounded to-button-border to-icon-anim" href="https://www.astralweb.com.tw/contact/"><span>免費諮詢</span><i class="to-button-icon fa fa fa-angle-double-right"></i></a></div>
+<div id="header-container" style="height:100px" class="section-container">
+<div class="sliding-menu-open">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="30">
+<rect x="1" y="9" width="18" height="2.5"></rect>
+<rect x="1" y="15" width="18" height="2.5"></rect>
+<rect x="1" y="21" width="18" height="2.5"></rect>
+</svg>
+</div>
+<div class="website-logo">
+<div>
+<a href="https://www.astralweb.com.tw/">
+<img class="logo-dark" src="./01_files/new-logo-image.webp" alt="">
+</a>
+</div>
+</div>
+<div class="tel"><span class="as-phone"></span><a href="tel:02 2928 0909">(02)2928-0909</a></div>
+<div id="header-social"><a target="_blank" href="https://www.linkedin.com/company/astral-web-taiwan"><i class="fa fa-linkedin"></i></a><a target="_blank" href="https://www.youtube.com/c/astralwebtw"><i class="fa fa-youtube"></i></a><a target="_blank" href="https://www.facebook.com/astralweb.com.tw"><i class="fa fa-facebook"></i></a><a target="_blank" href="https://www.instagram.com/astralweb_taiwan/"><i class="fa fa-instagram"></i></a></div>
+<nav id="top-nav" class="headerColor">
+<ul class="top-menu">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-27560"><a href="https://www.astralweb.com.tw/about/"><span>關於歐斯瑞<span class="arrow-indicator"><i class="fa fa-angle-down"></i></span></span></a>
+<ul class="sub-menu  ">
+<li class="mobile menu-item menu-item-type-post_type menu-item-object-page menu-item-28594"><a href="https://www.astralweb.com.tw/about/"><span><i class="icon-menu fa mobile"></i>專業認證</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27562"><a href="https://www.astralweb.com.tw/about/jobs/"><span>工作機會</span></a></li>
+</ul>
+</li>
+<li class="megamenu columns-3 menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-27566"><a href="https://www.astralweb.com.tw/services/magento/" class=""><span>Magento<span class="arrow-indicator"><i class="fa fa-angle-down"></i></span></span></a>
+<ul class="sub-menu  ">
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-27575"><a href="https://www.astralweb.com.tw/jmeter-website-stress-testing-tutorial/#"><span>Magento解決方案<span class="arrow-indicator"><i class="fa fa-angle-right"></i></span></span></a>
+<ul class="sub-menu  ">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27567"><a href="https://www.astralweb.com.tw/services/magento/"><span>Magento服務</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27570"><a href="https://www.astralweb.com.tw/services/magento/magento-open-source/"><span>Magento Open Source</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27568"><a href="https://www.astralweb.com.tw/services/magento/magento-commerce/"><span>Magento Commerce</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27569"><a href="https://www.astralweb.com.tw/services/magento/magento-commerce-cloud/"><span>Magento Commerce Cloud</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27624"><a href="https://www.astralweb.com.tw/services/magento/order-management-system/"><span>Magento OMS</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27572"><a href="https://www.astralweb.com.tw/services/magento/mirakl-marketplace-development/"><span>Magento X Mirakl B2B2C商城</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27571"><a href="https://www.astralweb.com.tw/services/magento/adobe-magento-commerce-b2b/"><span>Magento B2B</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-post menu-item-28314"><a href="https://www.astralweb.com.tw/b2e-sales-the-new-ecommerce-trend/"><span>Magento B2E</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-27576"><a href="https://www.astralweb.com.tw/jmeter-website-stress-testing-tutorial/#"><span>Magento內部系統串接<span class="arrow-indicator"><i class="fa fa-angle-right"></i></span></span></a>
+<ul class="sub-menu  ">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27578"><a href="https://www.astralweb.com.tw/services/magento/magento-erp/"><span>ERP管理系統整合 &nbsp;</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27580"><a href="https://www.astralweb.com.tw/services/pim/"><span>PIM 商品管理系統整合</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27579"><a href="https://www.astralweb.com.tw/services/magento/magento-pos-system/"><span>POS系統整合</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27577"><a href="https://www.astralweb.com.tw/services/magento/magento-crm/"><span>CRM客戶管理系統整合</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-27581"><a href="https://www.astralweb.com.tw/jmeter-website-stress-testing-tutorial/#"><span>Magento外部系統串接<span class="arrow-indicator"><i class="fa fa-angle-right"></i></span></span></a>
+<ul class="sub-menu  ">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27582"><a href="https://www.astralweb.com.tw/services/magento/magento-payment/"><span>各國金流系統</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27583"><a href="https://www.astralweb.com.tw/services/zendesk/"><span>第三方客服系統</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-27584"><a href="https://www.astralweb.com.tw/maintenance/magento/"><span>Magento健檢中心<span class="arrow-indicator"><i class="fa fa-angle-right"></i></span></span></a>
+<ul class="sub-menu  ">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27585"><a href="https://www.astralweb.com.tw/services/magento/magento1-upgrade-to-magento2/"><span>Magento1 升級 Magento2</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27586"><a href="https://www.astralweb.com.tw/maintenance/magento/"><span>Magento 維運服務</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-27587"><a href="https://www.astralweb.com.tw/services/magento/magento-headless-solutions-for-commerce-and-open-source-versions/"><span>Magento for Headless &amp; PWA<span class="arrow-indicator"><i class="fa fa-angle-right"></i></span></span></a>
+<ul class="sub-menu  ">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27588"><a href="https://www.astralweb.com.tw/services/magento/magento-headless-solutions-for-commerce-and-open-source-versions/"><span>Magento for Headless &amp; PWA</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-28592"><a href="https://www.astralweb.com.tw/services/shopify/" class=""><span>Shopify<span class="arrow-indicator"><i class="fa fa-angle-down"></i></span></span></a>
+<ul class="sub-menu  ">
+<li class="mobile menu-item menu-item-type-post_type menu-item-object-page menu-item-28595"><a href="https://www.astralweb.com.tw/services/shopify/"><span><i class="icon-menu fa mobile"></i>關於 Shopify</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-post menu-item-28333"><a href="https://www.astralweb.com.tw/shopify-plus-introduction/"><span>Shopify Plus</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-27590"><a href="https://www.astralweb.com.tw/services/ec-consultant/"><span>企業電商顧問<span class="arrow-indicator"><i class="fa fa-angle-down"></i></span></span></a>
+<ul class="sub-menu  ">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27591"><a href="https://www.astralweb.com.tw/services/digital-marketing/cro/"><span>電商轉換率分析CRO</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27592"><a href="https://www.astralweb.com.tw/services/digital-marketing/webpage-speed-optimization/"><span>網站速度優化</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27593"><a href="https://www.astralweb.com.tw/maintenance/server/"><span>AWS主機伺服器建置維運服務</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-27594"><a href="https://www.astralweb.com.tw/portfolio/"><span>成功經驗<span class="arrow-indicator"><i class="fa fa-angle-down"></i></span></span></a>
+<ul class="sub-menu  ">
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-27595"><a href="https://www.astralweb.com.tw/portfolio/"><span>客戶成功案例</span></a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27596"><a href="https://www.astralweb.com.tw/about/testimonials-and-reviews/"><span>客戶回饋</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-has-children menu-item-27597"><a href="https://www.astralweb.com.tw/resource/"><span>新知分享<span class="arrow-indicator"><i class="fa fa-angle-down"></i></span></span></a>
+<ul class="sub-menu  ">
+<li class="mobile menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-28596"><a href="https://www.astralweb.com.tw/resource/"><span><i class="icon-menu fa mobile"></i>所有新知</span></a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-27599"><a href="https://www.astralweb.com.tw/category/magento/"><span>Magento</span></a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-27598"><a href="https://www.astralweb.com.tw/category/shopify/"><span>Shopify</span></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27600"><a href="https://www.astralweb.com.tw/contact/"><span>聯絡我們</span></a></li>
+<li class="search-button no-nav clearfix">
+<i class="fa fa-search accentColorHover"></i>
+</li>
+<li class="sliding-sidebar-open accentColorHover">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="30">
+<rect x="8" y="6" width="2.5" height="18"></rect>
+<rect x="0" y="14" width="18" height="2.5"></rect>
+</svg>
+</li>
+</ul>
+</nav>
+<div class="search-button no-nav clearfix">
+<i class="fa fa-search accentColorHover"></i>
+</div>
+<div class="sliding-sidebar-open no-nav accentColorHover">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="30">
+<rect x="8" y="6" width="2.5" height="18"></rect>
+<rect x="0" y="14" width="18" height="2.5"></rect>
+</svg>
+</div>
+</div>
+<div id="to-woo-icons-menu">
+</div>
+<div id="cantPlay" class="accentBg"><i class="fa fa-times"></i> It can't be played in your browser. Download <a class="dlSong no-ajaxy" href="https://www.astralweb.com.tw/jmeter-website-stress-testing-tutorial/"><i class="fa fa-download"></i></a></div>
+</header>
+<div id="search-container" class="dark">
+<div id="search-inner" class="section-container">
+<form action="https://www.astralweb.com.tw/" method="GET" id="searchform" class="search">
+<input type="text" class="field search " name="s" autocomplete="off" maxlength="100" placeholder="請輸入關鍵字">
+<i class="fa fa-times accentColorHover"></i>
+
+<button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+</form> <div class="search-results"></div>
+</div>
+<div id="search-overlay"></div>
+<div id="search-msg"></div>
+</div>
+<div id="scrollToTop">
+<div id="scrollToTop-inner" style="opacity: 8.29016e-05;">
+<div id="scrollToTop-overlay" class="accentBgHover">
+<i class="fa fa-angle-up"></i>
+</div>
+</div>
+</div>
+<div class="loading-container">
+<div class="loading"></div>
+</div>
+<div id="outer-container">
+<div id="push-anim-overlay"></div>
+<div id="vc-spacer" style="height:100px;"></div>
+<div id="inner-container" class="dark">
+<div id="header-spacer" style="height:100px;"></div>
+<div class="to-page-heading  dark left  no-border to-page-heading-img-true" style="padding-top: 185px; margin-top: -115px;" data-header-color="dark" data-transparent=""><div id="header-image" style="background-image:url(https://www.astralweb.com.tw/wp-content/uploads/2021/07/banner-resource-2.jpg);background-position: center top;" class="to-header-image no-repeat"></div><div class="section-container"><div class="col col-12 col-last"><div class="col col-12 col-last"><h1 class="single-title">JMeter-網頁壓力測試教學</h1><div id="single-post-information"><span class="meta-author-avatar"><img src="./01_files/P_06-2-60x60.webp" width="50" height="50" alt="Astral Web" class="avatar avatar-50 wp-user-avatar wp-user-avatar-50 alignnone photo"></span><span class="meta-author vcard author">By <a href="https://www.astralweb.com.tw/author/admin/">Astral Web</a></span> <span class="meta-date date updated"><i class="fa fa-bookmark-o"></i>2 years ago</span><span class="meta-comment-count"><a href="https://www.astralweb.com.tw/jmeter-website-stress-testing-tutorial/#respond"><i class="fa fa-comment-o"></i>No Comments</a></span></div></div></div></div></div><div class="section-container"><div id="to-crumbs-overlay"></div><div id="to-crumbs"><a href="https://www.astralweb.com.tw/"><i class="steadysets-icon-map-marker"></i>首頁</a> &nbsp;/&nbsp; <a href="https://www.astralweb.com.tw/category/development/">技術應用</a> &nbsp;/&nbsp; <a href="https://www.astralweb.com.tw/category/development/website-qa-testing/">網站測試</a> &nbsp;/&nbsp; <span class="current">JMeter-網頁壓力測試教學</span></div></div><section id="single-post-section"><div class="section-container"><div class="article-holder col-9 col"><article id="post-26902" class="post-26902 post type-post status-publish format-standard has-post-thumbnail hentry category-website-qa-testing category-development tag-867 tag-1336">
+<p><img loading="lazy" class="alignnone size-large wp-image-26903" src="./01_files/JMeter網頁壓力測試教學-1024x538.jpg" alt="" width="1024" height="538" srcset="https://www.astralweb.com.tw/wp-content/uploads/2021/05/JMeter網頁壓力測試教學-1024x538.jpg 1024w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/JMeter網頁壓力測試教學-300x158.jpg 300w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/JMeter網頁壓力測試教學-768x403.jpg 768w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/JMeter網頁壓力測試教學-500x263.jpg 500w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/JMeter網頁壓力測試教學-400x210.jpg 400w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/JMeter網頁壓力測試教學.jpg 1500w" sizes="(max-width: 1024px) 100vw, 1024px"></p>
+<p><span style="font-weight: 400;">上次我們說到JMeter的安裝，這次來說說網頁壓力測試。一起來看看吧！</span></p>
+<h3><b>JMeter壓力測試</b><span style="font-weight: 400;"><br>
+</span><span style="font-weight: 400;">主要是指定頁面裡在時間內有多少人進入頁面。</span><span style="font-weight: 400;"><br>
+</span><span style="font-weight: 400;">我們先用以下二種做測試：</span></h3>
+<p><span style="font-weight: 400;">1. 一秒內10個人進入Google首頁</span><span style="font-weight: 400;"><br>
+</span><span style="font-weight: 400;">2. 一秒內10個人進入Google網頁，三分鐘後自動停止</span></p>
+<h3><b>JMeter前置作業</b><span style="font-weight: 400;"><br>
+</span><span style="font-weight: 400;">1.開啟 JMeter 的方式請參考 </span><a href="https://www.astralweb.com.tw/website-test-tool-jmeter-teaching/"><span style="font-weight: 400;">網站測試工具-JMeter教學</span></a><span style="font-weight: 400;"> ，預設開啟後就會有一個測試計畫。</span></h3>
+<p><img loading="lazy" class="alignnone size-large wp-image-26904" src="./01_files/image1-4-1024x577.png" alt="" width="1024" height="577" srcset="https://www.astralweb.com.tw/wp-content/uploads/2021/05/image1-4-1024x577.png 1024w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image1-4-300x169.png 300w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image1-4-768x432.png 768w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image1-4-500x282.png 500w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image1-4-400x225.png 400w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image1-4.png 1522w" sizes="(max-width: 1024px) 100vw, 1024px"></p>
+<p><span style="font-weight: 400;">2.如果有需要中文的話，可以在功能列Options選項的Choose Language 改為中文Chinese(Traditional) 。</span></p>
+<p><img loading="lazy" class="alignnone size-full wp-image-26913" src="./01_files/image10.webp" alt="" width="814" height="586" srcset="https://www.astralweb.com.tw/wp-content/uploads/2021/05/image10.png 814w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image10-300x216.png 300w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image10-768x553.png 768w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image10-500x360.png 500w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image10-400x288.png 400w" sizes="(max-width: 814px) 100vw, 814px"></p>
+<p><span style="font-weight: 400;">註：但不建議改中文，因為翻譯的中文會有點怪，也不是每個項目都有翻譯到。</span></p>
+<h3><b>JMeter網頁測試設定</b></h3>
+<p><span style="font-weight: 400;">1.建立Thread Group(執行緒群組)。</span><span style="font-weight: 400;"><br>
+</span><span style="font-weight: 400;">滑鼠在測試計畫點右鍵，選擇Add -&gt; Threads(Users) -&gt; Thread Group</span></p>
+<p><img loading="lazy" class="alignnone size-full wp-image-26906" src="./01_files/image3-2.png" alt="" width="856" height="434" srcset="https://www.astralweb.com.tw/wp-content/uploads/2021/05/image3-2.png 856w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image3-2-300x152.png 300w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image3-2-768x389.png 768w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image3-2-500x254.png 500w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image3-2-400x203.png 400w" sizes="(max-width: 856px) 100vw, 856px"></p>
+<p><span style="font-weight: 400;">2.設定人數10人、時間一秒、三分鐘後自動停止</span><span style="font-weight: 400;"><br>
+</span><span style="font-weight: 400;">Thread Properties</span></p>
+<p><span style="font-weight: 400;">Number of Threads(users) = 10&nbsp;</span></p>
+<p><span style="font-weight: 400;">Ramp-up period(seconds) = 1</span><span style="font-weight: 400;"><br>
+</span><span style="font-weight: 400;">Specify Thread lifetime = 勾選</span></p>
+<p><span style="font-weight: 400;">Duration(seconds) =180</span></p>
+<p><img loading="lazy" class="alignnone size-large wp-image-26914" src="./01_files/image11-1024x664.png" alt="" width="1024" height="664" srcset="https://www.astralweb.com.tw/wp-content/uploads/2021/05/image11-1024x664.png 1024w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image11-300x195.png 300w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image11-768x498.png 768w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image11-500x324.png 500w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image11-400x259.png 400w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image11.png 1027w" sizes="(max-width: 1024px) 100vw, 1024px"></p>
+<p><span style="font-weight: 400;">3.建立HTTP Request(Http要求)</span><span style="font-weight: 400;"><br>
+</span><span style="font-weight: 400;">滑鼠在Thread Group(執行緒群組)點右鍵，Add -&gt; Sampler -&gt; HTTP Request</span></p>
+<p><img loading="lazy" class="alignnone size-full wp-image-26908" src="./01_files/image5-2.png" alt="" width="1001" height="702" srcset="https://www.astralweb.com.tw/wp-content/uploads/2021/05/image5-2.png 1001w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image5-2-300x210.png 300w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image5-2-768x539.png 768w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image5-2-500x351.png 500w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image5-2-1000x700.png 1000w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image5-2-400x281.png 400w" sizes="(max-width: 1001px) 100vw, 1001px"></p>
+<p><span style="font-weight: 400;">註：這個就是http request，當我們要測試Web Api的時候通常都會有Http request去請求Api，可以在裡面設定Api路徑，用什麼請求方式等等。</span></p>
+<p><span style="font-weight: 400;">4.指定要測試的網頁(如下圖紅框)，這邊使用google首頁</span><span style="font-weight: 400;"><br>
+</span><span style="font-weight: 400;">Protocol[http] = https&nbsp;</span></p>
+<p><span style="font-weight: 400;">Server Name or IP= www.google.com.tw</span></p>
+<p><span style="font-weight: 400;">Path = 空值 (填寫 / 和之後的訊息)</span></p>
+<p><img loading="lazy" class="alignnone size-large wp-image-26909" src="./01_files/image6-1-1024x577.png" alt="" width="1024" height="577" srcset="https://www.astralweb.com.tw/wp-content/uploads/2021/05/image6-1-1024x577.png 1024w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image6-1-300x169.png 300w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image6-1-768x432.png 768w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image6-1-500x282.png 500w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image6-1-400x225.png 400w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image6-1.png 1522w" sizes="(max-width: 1024px) 100vw, 1024px"></p>
+<p><span style="font-weight: 400;">5.建立report可用產生的數據來了解壓力測試的效能</span><span style="font-weight: 400;"><br>
+</span><span style="font-weight: 400;">滑鼠在Thread Group(執行緒群組)點右鍵，Add -&gt; Listener -&gt; View Results Tree(偵聽器)</span></p>
+<p><img loading="lazy" class="alignnone size-full wp-image-26910" src="./01_files/image7.png" alt="" width="1017" height="767" srcset="https://www.astralweb.com.tw/wp-content/uploads/2021/05/image7.png 1017w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image7-300x226.png 300w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image7-768x579.png 768w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image7-500x377.png 500w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image7-400x302.png 400w" sizes="(max-width: 1017px) 100vw, 1017px"></p>
+<p><span style="font-weight: 400;">6.執行壓力測試。點擊「Start」(下圖紅框的綠色鍵頭)</span></p>
+<p><img loading="lazy" class="alignnone size-large wp-image-26907" src="./01_files/image4-2-1024x631.png" alt="" width="1024" height="631" srcset="https://www.astralweb.com.tw/wp-content/uploads/2021/05/image4-2-1024x631.png 1024w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image4-2-300x185.png 300w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image4-2-768x473.png 768w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image4-2-500x308.png 500w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image4-2-400x246.png 400w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image4-2.png 1052w" sizes="(max-width: 1024px) 100vw, 1024px"></p>
+<p><span style="font-weight: 400;">7.會要求先存檔，請點擊「Yes」button</span></p>
+<p><img loading="lazy" class="alignnone size-full wp-image-26911" src="./01_files/image8.webp" alt="" width="493" height="158" srcset="https://www.astralweb.com.tw/wp-content/uploads/2021/05/image8.png 493w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image8-300x96.png 300w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image8-400x128.png 400w" sizes="(max-width: 493px) 100vw, 493px"></p>
+<h3><b>測試結果</b></h3>
+<p><span style="font-weight: 400;">1. 測試失敗：View Results Tree(偵聽器)會標示紅色</span></p>
+<p><img loading="lazy" class="alignnone size-large wp-image-26905" src="./01_files/image2-2-1024x577.png" alt="" width="1024" height="577" srcset="https://www.astralweb.com.tw/wp-content/uploads/2021/05/image2-2-1024x577.png 1024w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image2-2-300x169.png 300w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image2-2-768x432.png 768w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image2-2-500x282.png 500w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image2-2-400x225.png 400w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image2-2.png 1522w" sizes="(max-width: 1024px) 100vw, 1024px"></p>
+<p><span style="font-weight: 400;">&nbsp;2. 執行成功：View Results Tree(偵聽器)會顯示綠色</span></p>
+<p><img loading="lazy" class="alignnone size-large wp-image-26912" src="./01_files/image9-1024x577.png" alt="" width="1024" height="577" srcset="https://www.astralweb.com.tw/wp-content/uploads/2021/05/image9-1024x577.png 1024w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image9-300x169.png 300w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image9-768x432.png 768w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image9-500x282.png 500w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image9-400x225.png 400w, https://www.astralweb.com.tw/wp-content/uploads/2021/05/image9.png 1522w" sizes="(max-width: 1024px) 100vw, 1024px"></p>
+<p>&nbsp;</p>
+<p>繼上一次的JMeter安裝，以上就是本篇的網頁壓力測試教學，大家都瞭解了嗎～喜歡歐斯瑞文章的讀者們，記得追蹤我們的<a href="https://www.facebook.com/astralweb.com.tw/">FB粉絲團</a>及<a href="https://www.instagram.com/astralweb_taiwan/">IG</a>，也別忘了訂閱<a href="https://astralweb.us3.list-manage.com/subscribe/post?u=736dfd24dea8d8ac15fe92981&amp;id=d0ab4718d0">電子報</a>，就不會錯過第一手的最新消息囉！有問題也歡迎<a href="https://www.astralweb.com.tw/contact/">聯繫我們</a>喔！</p>
+<p>&nbsp;</p>
+</article></div><div id="sidebar" class="col col-3 col-last" 0=""><div id="search-3" class="widget widget_search">
+<form action="https://www.astralweb.com.tw/" method="GET" id="searchform" class="search">
+<input type="text" class="field search " name="s" autocomplete="off" maxlength="100" placeholder="請輸入關鍵字">
+<i class="fa fa-times accentColorHover"></i>
+
+<button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+</form></div> <div id="recent-posts-3" class="widget widget_recent_entries"> <h4>Recent Posts</h4> <ul>
+<li>
+<a href="https://www.astralweb.com.tw/2023-tappay-service/">金流串接推薦！2023 TapPay 最新服務</a>
+</li>
+<li>
+<a href="https://www.astralweb.com.tw/photoshop-object-selection/">Photoshop【超簡單系列】物件選取工具</a>
+</li>
+<li>
+<a href="https://www.astralweb.com.tw/photoshop-neural-filters-color-harmonization/">Photoshop【超簡單系列】協調</a>
+</li>
+<li>
+<a href="https://www.astralweb.com.tw/top-10-google-analytics-4-configuration-mistakes/">前10大GA4錯誤設定</a>
+</li>
+<li>
+<a href="https://www.astralweb.com.tw/photoshop-neural-filters-color-transfer/">Photoshop【超簡單系列】顏色轉移</a>
+</li>
+</ul>
+</div><div id="categories-3" class="widget widget_categories"><h4>文章分類</h4> <ul>
+<li class="cat-item cat-item-1412"><a href="https://www.astralweb.com.tw/category/ecommerce-for-beginner/">電商新手包</a>
+<ul class="children">
+<li class="cat-item cat-item-1413"><a href="https://www.astralweb.com.tw/category/ecommerce-for-beginner/how-to-choose-ecommerce-platform/">選擇銷售平台</a>
+</li>
+<li class="cat-item cat-item-1414"><a href="https://www.astralweb.com.tw/category/ecommerce-for-beginner/magento-for-beginner/">Magento入門</a>
+</li>
+</ul>
+</li>
+<li class="cat-item cat-item-1409"><a href="https://www.astralweb.com.tw/category/ecommerce-news/">電商快訊</a>
+<ul class="children">
+<li class="cat-item cat-item-978"><a href="https://www.astralweb.com.tw/category/ecommerce-news/astralweb-news/">歐斯瑞新訊</a>
+</li>
+<li class="cat-item cat-item-1411"><a href="https://www.astralweb.com.tw/category/ecommerce-news/industry-news/">產業新知</a>
+</li>
+</ul>
+</li>
+<li class="cat-item cat-item-44"><a href="https://www.astralweb.com.tw/category/magento/">Magento</a>
+<ul class="children">
+<li class="cat-item cat-item-1335"><a href="https://www.astralweb.com.tw/category/magento/magento-open-source/">Open Source</a>
+</li>
+<li class="cat-item cat-item-1252"><a href="https://www.astralweb.com.tw/category/magento/adobe-commerce/">Adobe Commerce</a>
+</li>
+</ul>
+</li>
+<li class="cat-item cat-item-1245"><a href="https://www.astralweb.com.tw/category/shopify/">Shopify</a>
+</li>
+<li class="cat-item cat-item-54"><a href="https://www.astralweb.com.tw/category/development/">技術應用</a>
+<ul class="children">
+<li class="cat-item cat-item-1408"><a href="https://www.astralweb.com.tw/category/development/software-pm-note/">軟體PM小記</a>
+</li>
+<li class="cat-item cat-item-1265"><a href="https://www.astralweb.com.tw/category/development/%e5%89%8d%e7%ab%af%e9%96%8b%e7%99%bc/">前端開發</a>
+</li>
+<li class="cat-item cat-item-1271"><a href="https://www.astralweb.com.tw/category/development/%e5%be%8c%e7%ab%af%e9%96%8b%e7%99%bc/">後端開發</a>
+</li>
+<li class="cat-item cat-item-910"><a href="https://www.astralweb.com.tw/category/development/website-qa-testing/">網站測試</a>
+</li>
+</ul>
+</li>
+<li class="cat-item cat-item-1218"><a href="https://www.astralweb.com.tw/category/design/">設計分享</a>
+</li>
+<li class="cat-item cat-item-976"><a href="https://www.astralweb.com.tw/category/digital-marketing/">行銷與社群</a>
+</li>
+<li class="cat-item cat-item-918"><a href="https://www.astralweb.com.tw/category/ecommerce-service/">電商串接</a>
+<ul class="children">
+<li class="cat-item cat-item-1410"><a href="https://www.astralweb.com.tw/category/ecommerce-service/payment/">金流</a>
+</li>
+<li class="cat-item cat-item-1112"><a href="https://www.astralweb.com.tw/category/ecommerce-service/logistic/">物流</a>
+</li>
+<li class="cat-item cat-item-1274"><a href="https://www.astralweb.com.tw/category/ecommerce-service/customer-service/">客服</a>
+</li>
+<li class="cat-item cat-item-944"><a href="https://www.astralweb.com.tw/category/ecommerce-service/marketing/">行銷</a>
+</li>
+<li class="cat-item cat-item-1268"><a href="https://www.astralweb.com.tw/category/ecommerce-service/internal-managemet/">內部管理</a>
+</li>
+</ul>
+</li>
+</ul>
+</div><div id="archives-4" class="widget widget_archive"><h4>文章彙整</h4> <label class="screen-reader-text" for="archives-dropdown-4">文章彙整</label>
+<select id="archives-dropdown-4" name="archive-dropdown" onchange="document.location.href=this.options[this.selectedIndex].value;">
+<option value="">Select Month</option>
+<option value="https://www.astralweb.com.tw/2022/12/"> December 2022 &nbsp;(1)</option>
+<option value="https://www.astralweb.com.tw/2022/11/"> November 2022 &nbsp;(11)</option>
+<option value="https://www.astralweb.com.tw/2022/10/"> October 2022 &nbsp;(16)</option>
+<option value="https://www.astralweb.com.tw/2022/09/"> September 2022 &nbsp;(5)</option>
+<option value="https://www.astralweb.com.tw/2022/08/"> August 2022 &nbsp;(9)</option>
+<option value="https://www.astralweb.com.tw/2022/07/"> July 2022 &nbsp;(3)</option>
+<option value="https://www.astralweb.com.tw/2022/06/"> June 2022 &nbsp;(2)</option>
+<option value="https://www.astralweb.com.tw/2022/05/"> May 2022 &nbsp;(7)</option>
+<option value="https://www.astralweb.com.tw/2022/04/"> April 2022 &nbsp;(5)</option>
+<option value="https://www.astralweb.com.tw/2022/03/"> March 2022 &nbsp;(12)</option>
+<option value="https://www.astralweb.com.tw/2022/02/"> February 2022 &nbsp;(4)</option>
+<option value="https://www.astralweb.com.tw/2022/01/"> January 2022 &nbsp;(1)</option>
+<option value="https://www.astralweb.com.tw/2021/12/"> December 2021 &nbsp;(6)</option>
+<option value="https://www.astralweb.com.tw/2021/11/"> November 2021 &nbsp;(1)</option>
+<option value="https://www.astralweb.com.tw/2021/10/"> October 2021 &nbsp;(7)</option>
+<option value="https://www.astralweb.com.tw/2021/09/"> September 2021 &nbsp;(7)</option>
+<option value="https://www.astralweb.com.tw/2021/08/"> August 2021 &nbsp;(11)</option>
+<option value="https://www.astralweb.com.tw/2021/07/"> July 2021 &nbsp;(7)</option>
+<option value="https://www.astralweb.com.tw/2021/06/"> June 2021 &nbsp;(14)</option>
+<option value="https://www.astralweb.com.tw/2021/05/"> May 2021 &nbsp;(11)</option>
+<option value="https://www.astralweb.com.tw/2021/04/"> April 2021 &nbsp;(6)</option>
+<option value="https://www.astralweb.com.tw/2021/03/"> March 2021 &nbsp;(6)</option>
+<option value="https://www.astralweb.com.tw/2021/02/"> February 2021 &nbsp;(12)</option>
+<option value="https://www.astralweb.com.tw/2021/01/"> January 2021 &nbsp;(8)</option>
+<option value="https://www.astralweb.com.tw/2020/12/"> December 2020 &nbsp;(13)</option>
+<option value="https://www.astralweb.com.tw/2020/11/"> November 2020 &nbsp;(7)</option>
+<option value="https://www.astralweb.com.tw/2020/10/"> October 2020 &nbsp;(15)</option>
+<option value="https://www.astralweb.com.tw/2020/09/"> September 2020 &nbsp;(7)</option>
+<option value="https://www.astralweb.com.tw/2020/08/"> August 2020 &nbsp;(14)</option>
+<option value="https://www.astralweb.com.tw/2020/07/"> July 2020 &nbsp;(2)</option>
+<option value="https://www.astralweb.com.tw/2020/06/"> June 2020 &nbsp;(17)</option>
+<option value="https://www.astralweb.com.tw/2020/05/"> May 2020 &nbsp;(14)</option>
+<option value="https://www.astralweb.com.tw/2020/04/"> April 2020 &nbsp;(17)</option>
+<option value="https://www.astralweb.com.tw/2020/03/"> March 2020 &nbsp;(21)</option>
+<option value="https://www.astralweb.com.tw/2020/02/"> February 2020 &nbsp;(4)</option>
+<option value="https://www.astralweb.com.tw/2020/01/"> January 2020 &nbsp;(2)</option>
+<option value="https://www.astralweb.com.tw/2019/12/"> December 2019 &nbsp;(4)</option>
+<option value="https://www.astralweb.com.tw/2019/11/"> November 2019 &nbsp;(3)</option>
+<option value="https://www.astralweb.com.tw/2019/10/"> October 2019 &nbsp;(7)</option>
+<option value="https://www.astralweb.com.tw/2019/09/"> September 2019 &nbsp;(11)</option>
+<option value="https://www.astralweb.com.tw/2019/08/"> August 2019 &nbsp;(13)</option>
+<option value="https://www.astralweb.com.tw/2019/07/"> July 2019 &nbsp;(2)</option>
+<option value="https://www.astralweb.com.tw/2019/06/"> June 2019 &nbsp;(10)</option>
+<option value="https://www.astralweb.com.tw/2019/05/"> May 2019 &nbsp;(14)</option>
+<option value="https://www.astralweb.com.tw/2019/04/"> April 2019 &nbsp;(11)</option>
+<option value="https://www.astralweb.com.tw/2019/03/"> March 2019 &nbsp;(8)</option>
+<option value="https://www.astralweb.com.tw/2019/02/"> February 2019 &nbsp;(9)</option>
+<option value="https://www.astralweb.com.tw/2019/01/"> January 2019 &nbsp;(14)</option>
+<option value="https://www.astralweb.com.tw/2018/12/"> December 2018 &nbsp;(16)</option>
+<option value="https://www.astralweb.com.tw/2018/11/"> November 2018 &nbsp;(20)</option>
+<option value="https://www.astralweb.com.tw/2018/10/"> October 2018 &nbsp;(22)</option>
+<option value="https://www.astralweb.com.tw/2018/09/"> September 2018 &nbsp;(30)</option>
+<option value="https://www.astralweb.com.tw/2018/08/"> August 2018 &nbsp;(22)</option>
+<option value="https://www.astralweb.com.tw/2018/07/"> July 2018 &nbsp;(36)</option>
+<option value="https://www.astralweb.com.tw/2018/06/"> June 2018 &nbsp;(24)</option>
+<option value="https://www.astralweb.com.tw/2018/05/"> May 2018 &nbsp;(21)</option>
+<option value="https://www.astralweb.com.tw/2018/04/"> April 2018 &nbsp;(12)</option>
+<option value="https://www.astralweb.com.tw/2018/03/"> March 2018 &nbsp;(32)</option>
+<option value="https://www.astralweb.com.tw/2018/02/"> February 2018 &nbsp;(15)</option>
+<option value="https://www.astralweb.com.tw/2018/01/"> January 2018 &nbsp;(15)</option>
+<option value="https://www.astralweb.com.tw/2017/12/"> December 2017 &nbsp;(39)</option>
+<option value="https://www.astralweb.com.tw/2017/11/"> November 2017 &nbsp;(15)</option>
+<option value="https://www.astralweb.com.tw/2017/10/"> October 2017 &nbsp;(13)</option>
+<option value="https://www.astralweb.com.tw/2017/09/"> September 2017 &nbsp;(13)</option>
+<option value="https://www.astralweb.com.tw/2017/08/"> August 2017 &nbsp;(14)</option>
+<option value="https://www.astralweb.com.tw/2017/07/"> July 2017 &nbsp;(4)</option>
+<option value="https://www.astralweb.com.tw/2017/06/"> June 2017 &nbsp;(16)</option>
+<option value="https://www.astralweb.com.tw/2017/05/"> May 2017 &nbsp;(15)</option>
+<option value="https://www.astralweb.com.tw/2017/04/"> April 2017 &nbsp;(9)</option>
+<option value="https://www.astralweb.com.tw/2017/03/"> March 2017 &nbsp;(7)</option>
+<option value="https://www.astralweb.com.tw/2017/02/"> February 2017 &nbsp;(6)</option>
+<option value="https://www.astralweb.com.tw/2017/01/"> January 2017 &nbsp;(12)</option>
+<option value="https://www.astralweb.com.tw/2016/12/"> December 2016 &nbsp;(14)</option>
+<option value="https://www.astralweb.com.tw/2016/11/"> November 2016 &nbsp;(6)</option>
+<option value="https://www.astralweb.com.tw/2016/10/"> October 2016 &nbsp;(12)</option>
+<option value="https://www.astralweb.com.tw/2016/09/"> September 2016 &nbsp;(11)</option>
+<option value="https://www.astralweb.com.tw/2016/08/"> August 2016 &nbsp;(18)</option>
+<option value="https://www.astralweb.com.tw/2016/07/"> July 2016 &nbsp;(12)</option>
+<option value="https://www.astralweb.com.tw/2016/06/"> June 2016 &nbsp;(16)</option>
+<option value="https://www.astralweb.com.tw/2016/05/"> May 2016 &nbsp;(9)</option>
+<option value="https://www.astralweb.com.tw/2016/04/"> April 2016 &nbsp;(10)</option>
+<option value="https://www.astralweb.com.tw/2016/03/"> March 2016 &nbsp;(15)</option>
+<option value="https://www.astralweb.com.tw/2016/02/"> February 2016 &nbsp;(14)</option>
+<option value="https://www.astralweb.com.tw/2016/01/"> January 2016 &nbsp;(18)</option>
+<option value="https://www.astralweb.com.tw/2015/12/"> December 2015 &nbsp;(21)</option>
+<option value="https://www.astralweb.com.tw/2015/11/"> November 2015 &nbsp;(32)</option>
+<option value="https://www.astralweb.com.tw/2015/10/"> October 2015 &nbsp;(24)</option>
+<option value="https://www.astralweb.com.tw/2015/09/"> September 2015 &nbsp;(28)</option>
+<option value="https://www.astralweb.com.tw/2015/08/"> August 2015 &nbsp;(25)</option>
+<option value="https://www.astralweb.com.tw/2015/07/"> July 2015 &nbsp;(26)</option>
+<option value="https://www.astralweb.com.tw/2015/06/"> June 2015 &nbsp;(23)</option>
+<option value="https://www.astralweb.com.tw/2015/05/"> May 2015 &nbsp;(15)</option>
+<option value="https://www.astralweb.com.tw/2015/04/"> April 2015 &nbsp;(18)</option>
+<option value="https://www.astralweb.com.tw/2015/03/"> March 2015 &nbsp;(16)</option>
+<option value="https://www.astralweb.com.tw/2015/02/"> February 2015 &nbsp;(21)</option>
+<option value="https://www.astralweb.com.tw/2015/01/"> January 2015 &nbsp;(17)</option>
+<option value="https://www.astralweb.com.tw/2014/12/"> December 2014 &nbsp;(22)</option>
+<option value="https://www.astralweb.com.tw/2014/11/"> November 2014 &nbsp;(20)</option>
+<option value="https://www.astralweb.com.tw/2014/10/"> October 2014 &nbsp;(15)</option>
+<option value="https://www.astralweb.com.tw/2014/09/"> September 2014 &nbsp;(13)</option>
+<option value="https://www.astralweb.com.tw/2014/08/"> August 2014 &nbsp;(11)</option>
+<option value="https://www.astralweb.com.tw/2014/07/"> July 2014 &nbsp;(12)</option>
+<option value="https://www.astralweb.com.tw/2014/06/"> June 2014 &nbsp;(9)</option>
+<option value="https://www.astralweb.com.tw/2014/05/"> May 2014 &nbsp;(10)</option>
+<option value="https://www.astralweb.com.tw/2014/04/"> April 2014 &nbsp;(11)</option>
+<option value="https://www.astralweb.com.tw/2014/03/"> March 2014 &nbsp;(6)</option>
+<option value="https://www.astralweb.com.tw/2014/01/"> January 2014 &nbsp;(1)</option>
+<option value="https://www.astralweb.com.tw/2013/11/"> November 2013 &nbsp;(5)</option>
+<option value="https://www.astralweb.com.tw/2013/10/"> October 2013 &nbsp;(2)</option>
+</select>
+</div></div><div class="clear"></div><div class="to-social"><div class="to-social-holder"><div class="to-social-list"><span class="no-ajaxy post-like no-liked" data-post_id="26902" title="Like"><i class="fa fa-heart-o"></i>&nbsp;<span class="post-like-count">0</span></span><span class="facebook-share to-social-button" title="Share this"><i class="fa fa-facebook accentColor"></i><span class="count">0</span></span><span class="pinterest-share to-social-button" title="Pin this"><i class="fa fa-pinterest accentColor"></i><span class="count">0</span></span><span class="google-share to-social-button" title="Share this"><i class="fa fa-google-plus accentColor"></i><span class="count">0</span></span><span class="twitter-share to-social-button" title="Tweet this"><i class="fa fa-twitter accentColor"></i><span class="count">0</span></span></div></div></div><div id="custom_html-2" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div class="post-call-row">
+<div class="post-call-info">
+<p class="call-image"><img width="200" src="./01_files/Logo-w01-3.webp" alt="歐斯瑞"></p>
+<p class="call-title">歐斯瑞 - 一個對網路世界充滿熱情的團隊</p>
+<p class="call-desc"> 歐斯瑞提供免費電商知識，並協助各大類型之企業
+<a href="https://www.astralweb.com.tw/services/ec-consultant/">電商諮詢建置</a> 與
+<a href="https://www.astralweb.com.tw/services/magento/">Magento</a> 和
+<a href="https://www.astralweb.com.tw/services/shopify/">Shopify</a> 相關的電商專案。
+</p>
+</div>
+<div class="post-call-action">
+<a target="_self" class="to-button regular standard full-rounded to-button-bg to-icon-anim" style="color:#DF5A2E;background:#FFFFFF;" href="https://www.astralweb.com.tw/contact/">
+<span style="color:#DF5A2E;">立即聯繫我們</span><i class="to-button-icon fa fa fa-long-arrow-right"></i>
+</a>
+</div>
+</div></div></div><div id="post-nav"><div class="section-container"><div id="post-prev-link" class="accentColorHover"><a href="https://www.astralweb.com.tw/use-markdown-to-write-api/" rel="next"><span class="post-nav-prev">上一篇文章</span><h3>使用Markdown來編寫API</h3></a></div><div id="post-next-link" class="accentColorHover"><a href="https://www.astralweb.com.tw/magento-cloud-how-to-use-patch-to-revise-in-the-project/" rel="prev"><span class="post-nav-next">下一篇文章</span><h3>Magento Cloud – 如何在專案中使用Patch進行修正</h3></a></div> </div></div><div class="to-divider"></div><h3 class="comments-title">推薦文章</h3><div class="to-related-posts"><div class="to-grid-container to-masonry clearfix" data-grid-type="masonry" data-type="post" data-orderby="" data-rownb="2" data-colsup="4" data-col1600="4" data-col1280="4" data-col1000="3" data-col960="2" data-ratio="0.7" data-gutter="10" data-postsize="" data-portsize="" data-portstyle="" data-hlayout="" data-postnb="12" data-ttposts="390" data-pagenb="1" data-category="" data-desktop="true"><div class="to-grid-scroll vertical" style="min-width:1180px !important"><div class="to-grid-holder vertical clearfix" style="position: relative; height: 331.3px;"><div class="to-item blog tall" data-cat="" style="width: 295px; position: absolute; left: 0px; top: 0px;"><div class="to-item-wrapper" style="margin: 2px"><div class="to-item-image"><a rel="external" href="https://www.astralweb.com.tw/photoshop-plug-in-module/"><img loading="lazy" class="to-item-img" src="./01_files/FB-500x350.webp"></a></div><div class="to-item-content"><div class="to-item-content-inner"><h2><a href="https://www.astralweb.com.tw/photoshop-plug-in-module/">Photoshop【入門】增效模組</a></h2><span class="to-item-date">2022-07-25</span><span class="no-ajaxy post-like no-liked" data-post_id="28256" title="Like"><i class="fa fa-heart-o"></i>&nbsp;<span class="post-like-count">0</span></span></div></div></div></div><div class="to-item blog tall" data-cat="" style="width: 295px; position: absolute; left: 295px; top: 0px;"><div class="to-item-wrapper" style="margin: 2px"><div class="to-item-image"><a rel="external" href="https://www.astralweb.com.tw/using-supports-to-test-css-support/"><img loading="lazy" class="to-item-img" src="./01_files/前端開發：使用@SUPPORT來檢查瀏覽器支援性-500x350.webp"></a></div><div class="to-item-content"><div class="to-item-content-inner"><h2><a href="https://www.astralweb.com.tw/using-supports-to-test-css-support/">前端開發：使用@supports來檢查瀏覽器支援性</a></h2><span class="to-item-date">2022-05-26</span><span class="no-ajaxy post-like no-liked" data-post_id="28144" title="Like"><i class="fa fa-heart-o"></i>&nbsp;<span class="post-like-count">0</span></span></div></div></div></div><div class="to-item blog tall" data-cat="" style="width: 295px; position: absolute; left: 590px; top: 0px;"><div class="to-item-wrapper" style="margin: 2px"><div class="to-item-image"><a rel="external" href="https://www.astralweb.com.tw/fixing-slick-js-vertical-height-issues/"><img loading="lazy" class="to-item-img" src="./01_files/前端開發：解決SLICK-JS垂直滑動時出現的高度問題-500x350.webp"></a></div><div class="to-item-content"><div class="to-item-content-inner"><h2><a href="https://www.astralweb.com.tw/fixing-slick-js-vertical-height-issues/">前端開發：解決slider js垂直滑動時出現的高度問題</a></h2><span class="to-item-date">2022-05-24</span><span class="no-ajaxy post-like no-liked" data-post_id="28069" title="Like"><i class="fa fa-heart-o"></i>&nbsp;<span class="post-like-count">0</span></span></div></div></div></div><div class="to-item blog tall" data-cat="" style="width: 295px; position: absolute; left: 885px; top: 0px;"><div class="to-item-wrapper" style="margin: 2px"><div class="to-item-image"><a rel="external" href="https://www.astralweb.com.tw/magento2-set-up-schedule-group/"><img loading="lazy" class="to-item-img" src="./01_files/Magento2開發設置排程群組-500x350.webp"></a></div><div class="to-item-content"><div class="to-item-content-inner"><h2><a href="https://www.astralweb.com.tw/magento2-set-up-schedule-group/">Magento2 開發 – 設置排程群組</a></h2><span class="to-item-date">2022-05-20</span><span class="no-ajaxy post-like no-liked" data-post_id="28060" title="Like"><i class="fa fa-heart-o"></i>&nbsp;<span class="post-like-count">0</span></span></div></div></div></div></div></div></div></div><div class="post-cat-holder"><h5>Categories:</h5>&nbsp;&nbsp;<a href="https://www.astralweb.com.tw/category/development/website-qa-testing/" title="View all posts in 網站測試">網站測試</a><a href="https://www.astralweb.com.tw/category/development/" title="View all posts in 技術應用">技術應用</a></div><div class="post-tag-holder"><h5>Tags:</h5>&nbsp;&nbsp;<a href="https://www.astralweb.com.tw/tag/%e7%b6%b2%e7%ab%99%e6%b8%ac%e8%a9%a6/" rel="tag">網站測試</a>, <a href="https://www.astralweb.com.tw/tag/%e7%b6%b2%e7%ab%99%e6%8a%80%e8%a1%93%e8%88%87%e8%a8%ad%e8%a8%88/" rel="tag">網站技術與設計</a></div><div class="to-divider"></div>
+
+
+<ul class="comment-list">
+</ul>
+<div id="respond" class="comment-respond">
+<h3 id="reply-title" class="comment-reply-title">留下回應 <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://www.astralweb.com.tw/jmeter-website-stress-testing-tutorial/#respond" style="display:none;">取消回覆</a></small></h3> <form action="https://www.astralweb.com.tw/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+<p class="comment-notes">你的電子郵件地址不會被公開.</p><div class="row"><div class="col col-12"><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></div></div><div class="row"> <div class="col col-4"><label for="author">姓名 <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30"></div>
+<div class="col col-4"><label for="email">電子郵件 <span class="required">*</span></label><input id="email" name="email" type="text" value="" size="30"></div>
+<div class="col col-4 col-last"><label for="url">網站</label><input id="url" name="url" type="text" value="" size="30"></div></div>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="送出留言"> <input type="hidden" name="comment_post_ID" value="26902" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="1667bf3e71"></p><p style="display: none;"></p> <input type="hidden" id="ak_js" name="ak_js" value="1670291957128"></form>
+</div>
+<div class="clear"></div> </div></section>
+<footer id="footer">
+<div id="footer-background" style="background-image: url(https://www.astralweb.com.tw/wp-content/uploads/2021/07/footer_bg.jpg)"></div>
+<div id="footer-top">
+<div id="footer-top-overlay" style="background:#222222;opacity:0.50"></div>
+<div id="footer-inner-top" class="section-container light">
+<div class="marg col col-8 ">
+<div id="nav_menu-2" class="widget widget_nav_menu"><div class="menu-footer-links-container"><ul id="menu-footer-links" class="menu"><li id="menu-item-27601" class="col col-3 menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-27601 col1-4 clear-both"><a href="https://www.astralweb.com.tw/jmeter-website-stress-testing-tutorial/">關於歐斯瑞</a>
+<ul class="sub-menu">
+<li id="menu-item-27603" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27603"><a href="https://www.astralweb.com.tw/about/jobs/">徵才資訊</a></li>
+<li id="menu-item-27604" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27604"><a href="https://www.astralweb.com.tw/contact/">聯絡我們</a></li>
+</ul>
+</li>
+<li id="menu-item-27605" class="col col-3 menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-27605 col1-4 right-edge"><a href="https://www.astralweb.com.tw/jmeter-website-stress-testing-tutorial/">Magento</a>
+<ul class="sub-menu">
+<li id="menu-item-27606" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27606"><a href="https://www.astralweb.com.tw/services/magento/">Magento服務</a></li>
+<li id="menu-item-27609" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27609"><a href="https://www.astralweb.com.tw/services/magento/magento-open-source/">Magento 2 Open Source (CE)開源版</a></li>
+<li id="menu-item-27607" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27607"><a href="https://www.astralweb.com.tw/services/magento/magento-commerce/">Magento 2 Commerce (EE)商業版</a></li>
+<li id="menu-item-27608" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27608"><a href="https://www.astralweb.com.tw/services/magento/magento-commerce-cloud/">Magento 2 Commerce Cloud (雲端版)</a></li>
+<li id="menu-item-27623" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27623"><a href="https://www.astralweb.com.tw/services/magento/order-management-system/">Magento OMS</a></li>
+<li id="menu-item-27610" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27610"><a href="https://www.astralweb.com.tw/services/magento/magento-tutorial/">Magento 教學導覽</a></li>
+</ul>
+</li>
+<li id="menu-item-27611" class="col col-3 menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-27611 col1-4 clear-both"><a href="https://www.astralweb.com.tw/jmeter-website-stress-testing-tutorial/">Shopify</a>
+<ul class="sub-menu">
+<li id="menu-item-28593" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28593"><a href="https://www.astralweb.com.tw/services/shopify/">Shopify服務</a></li>
+</ul>
+</li>
+<li id="menu-item-27613" class="col col-3 col-last menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-27613 col1-4 right-edge"><a href="https://www.astralweb.com.tw/jmeter-website-stress-testing-tutorial/">電商顧問</a>
+<ul class="sub-menu">
+<li id="menu-item-27614" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27614"><a href="https://www.astralweb.com.tw/services/ec-consultant/">電商顧問服務</a></li>
+</ul>
+</li>
+</ul></div></div> </div>
+<div class="marg col col-4 ">
+<div id="text-2" class="widget widget_text"> <div class="textwidget"><div class="textwidget">
+<h2 style="margin: 0;">北區業務中心：</h2>
+<p>(02)2928-0909</p>
+<p class="p1"><span class="s1">234011</span>新北市永和區永貞路<span class="s1">429</span>號<span class="s1">1F</span></p>
+<h2 style="margin: 0;">電子信箱：</h2>
+<p>info@astralwebinc.com<br>
+<a style="display: block; margin-left: -5px;" href="https://solutionpartners.adobe.com/s/directory/detail/astral+web+taiwan"><br>
+<img id="footer-magento-icon" style="height: auto;" src="./01_files/FT-big.webp" alt="Magento Solution Partner"></a><br>
+<a class="to-button regular standard full-rounded to-button-border to-icon-anim " style="color: #df5a2e; background: none !important; border-color: #df5a2e;" href="https://www.astralweb.com.tw/index_en.html" target="_blank" rel="noopener" data-bgcolor="#df5a2e" data-color="#df5a2e"><span style="color: #df5a2e;">Astral web-English site</span><i class="to-button-icon fa fa fa-long-arrow-right"></i></a></p>
+</div>
+</div>
+</div> </div>
+</div>
+</div>
+<div id="footer-bottom"><div id="footer-bot-overlay" style="background:#222222;opacity:0.66"></div><div id="footer-inner-bottom" class="section-container"><div class="col col-5"><div id="copyright" style="color:#EBEBEB">© 2013-2022. Astral Web 歐斯瑞有限公司 All Rights Reserved.</div></div><div class="col col-7 col-last"><div id="footer-social"><a style="width: 70px; font-size: 14px; color: #EBEBEB" href="https://www.astralweb.com.tw/privacy/">隱私條款 | </a><a target="_blank" href="https://www.linkedin.com/company/astral-web-taiwan" style="color:#EBEBEB"><i class="fa fa-linkedin"></i></a><a target="_blank" href="https://www.youtube.com/c/astralwebtw" style="color:#EBEBEB"><i class="fa fa-youtube"></i></a><a target="_blank" href="https://www.facebook.com/astralweb.com.tw" style="color:#EBEBEB"><i class="fa fa-facebook"></i></a><a target="_blank" href="https://www.instagram.com/astralweb_taiwan/" style="color:#EBEBEB"><i class="fa fa-instagram"></i></a></div></div></div></div> </footer>
+</div>
+</div><div id="current-player" class="desktop">
+<div id="current-cover"></div>
+<div id="current-player-overlay">
+<div id="current-title"></div>
+<div id="current-artist"></div>
+</div>
+<i class="current-player-close icon-to-x accentColorHover"></i>
+<div id="current-player-mini">
+<i class="current-player-open icon-to-right-arrow-thin accentColorHover"></i>
+</div>
+</div> 
+<a target="_blank" onclick="”ga(‘send’," ‘event’,="" ‘link’,="" ‘click’,="" ‘linktext’);”="" href="https://www.astralweb.com.tw/maintenance/" id="btn-jobs"><span>維</span><span>運</span><span>服</span><span>務</span></a>
+<script type="text/javascript">
+['scroll', 'mousedown', 'mousemove', 'touchstart', 'keydown'].forEach(function(cur){
+    window.addEventListener(cur, zopimlaunch)
+});
+function zopimlaunch () {
+    window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set._.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+    $.src='//v2.zopim.com/?1mRhtU7TAMJMnn1DPgN7hLqTHiuXdrUi';z.t=+new Date;$.type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+
+    ['scroll', 'mousedown', 'mousemove', 'touchstart', 'keydown'].forEach(function(cur){
+        window.removeEventListener(cur, zopimlaunch)
+    });
+}
+</script>
+<script type="text/javascript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+    if ( '96' == event.detail.contactFormId ) {
+        ga( 'send', 'event', 'Contact Form MAIN', 'submit' );
+    }
+    if ( '8989' == event.detail.contactFormId ) {
+        ga( 'send', 'event', 'Contact Form', 'submit' );
+    }
+    if ( '1471' == event.detail.contactFormId ) {
+        ga( 'send', 'event', 'Contact Form', 'submit' );
+    }
+    if ( '2748' == event.detail.contactFormId ) {
+        ga( 'send', 'event', 'Contact Form SIDE', 'submit' );
+    }
+}, false );
+</script>
+<script type="text/javascript" src="./01_files/jquery.easing.js.下載"></script>
+<script type="text/javascript" src="./01_files/owl.carousel.js.下載"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.astralweb.com.tw/wp-content/plugins/themeone-shortcodes/shortcodes/js/excanvas.js?ver=2.0'></script>
+<![endif]-->
+<script type="text/javascript" src="./01_files/easypiechart.js.下載"></script>
+<script type="text/javascript" src="./01_files/jquery.appear.js.下載"></script>
+<script type="text/javascript" src="./01_files/themeone-shortcodes.js.下載"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var ajax_var = {"url":"https:\/\/www.astralweb.com.tw\/wp-admin\/admin-ajax.php","nonce":"ac97a14b8a"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./01_files/post-like.js.下載"></script>
+<script type="text/javascript" src="./01_files/ajax-comments.js.下載"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wpcf7 = {"apiSettings":{"root":"https:\/\/www.astralweb.com.tw\/wp-json\/contact-form-7\/v1","namespace":"contact-form-7\/v1"},"recaptcha":{"messages":{"empty":"Please verify that you are not a robot."}}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./01_files/scripts.js.下載"></script>
+<script type="text/javascript" src="./01_files/pretty.js.下載"></script>
+<script type="text/javascript" src="./01_files/script.js.下載"></script>
+<script type="text/javascript" src="./01_files/smoothscroll.js.下載"></script>
+<script type="text/javascript" src="./01_files/owl.carousel.js(1).下載"></script>
+<script type="text/javascript" src="./01_files/hammer.js.下載"></script>
+<script type="text/javascript" src="./01_files/isotope.js.下載"></script>
+<script type="text/javascript" src="./01_files/sly.js.下載"></script>
+<script type="text/javascript" src="./01_files/enquire.js.下載"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var to_ajaxurl = "https:\/\/www.astralweb.com.tw\/wp-admin\/admin-ajax.php";
+/* ]]> */
+</script>
+<script type="text/javascript" src="./01_files/custom.js.下載"></script>
+<script type="text/javascript" src="./01_files/comment-reply.min.js.下載"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wp_ajax = {"url":"https:\/\/www.astralweb.com.tw\/wp-admin\/admin-ajax.php","nonce":"ba98742e45"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./01_files/mobius-grid.js.下載"></script>
+<script type="text/javascript" src="./01_files/wp-embed.min.js.下載"></script>
+<script async="async" type="text/javascript" src="./01_files/form.js.下載"></script>
+<script type="text/javascript">
+	 (function($) {
+	 "use strict";                                    })(jQuery);
+	  </script>
+<script type="text/javascript">
+ga('send','pageview',{'dimension2':  'website-qa-testing'});//category-id
+ga('send','pageview',{'dimension3':  '網站測試'});//category-name
+ga('send','pageview',{'dimension4':  '網站測試'});//tag
+ga('send','pageview', {
+'dimension5':  'Astral Web'
+});//author
+</script>
+<script type="text/javascript"> _linkedin_data_partner_id = "169219"; </script><script type="text/javascript"> (function(){var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})(); </script> <noscript> <img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=169219&fmt=gif" /> </noscript>
+<script>(function(){var js = "window['__CF$cv$params']={r:'77516b87fd707be0',m:'8x7b0FhNxveKQM8xaJqoV0GVIQhQoHaj3iI8PlsU5Kk-1670291943-0-AalIteVntPNUmN1jsqqGPDtDkWSwAMh/5GKVyzfZz4FS/P7gnYmik39iv+NqMraYoMg3jeH2fb4aggbVUcKSAt49gNWMyJb/A7oOJixVZOjDGBw0bYLZ1ef8iBowTKAaH7mvMrJ2ZnwNLo+N/aOrHNLxEHxvKXnUmZmOYibMKX3p',s:[0xd11785a0c0,0xcb8fa55958],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.nonce = '';_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;" src="./01_files/saved_resource(2).html"></iframe>
+
+</body></html>
